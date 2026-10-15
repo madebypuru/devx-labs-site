@@ -1,9 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<script>(function(){var t;try{t=localStorage.getItem("devx-theme")}catch(e){}
-if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Assurance and Governance: LLM Evals, Guardrails and AI Security | devx</title>
 <meta name="description" content="Evaluation suites, guardrails, AI security testing, safe model migration and continuous compliance evidence for every AI system you run.">
@@ -13,7 +11,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-<link rel="stylesheet" href="assets/hairline/devx-figs.css">
+<link rel="stylesheet" href="./assets/hairline/devx-figs.css">
 <style>
   :root {
 
@@ -23,8 +21,8 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
     --side: #f1f1ef; --side-dk: #e6e6e3; --edge: #aeb3ba; --guide: #c9ccd1;
     --l1: #dbdee5; --l2: #e0e3eb; --l3: #eceef2; --l4: #d9dce2;
     --hl-e: #999ea8; --hl-m: #b9bdc6; --lane: #efeeea; --lane-on: #c3c6cc; --lane-flag: #eab3a8; --arc: #ebebe7;
-    --grey-a: #c1c3c4; --grey-b: #ecebe7; --grey-c: #c3c7cd; --t5: #f4f4f2; --hit: #c8402c; --shadow-rgb: 13, 32, 44; --dots-img: url("assets/dot-grid.svg");
-    --hero-img: url("assets/hero-bg.svg"); --px-img: url("assets/pixel-blocks.jpg");
+    --grey-a: #c1c3c4; --grey-b: #ecebe7; --grey-c: #c3c7cd; --t5: #f4f4f2; --hit: #c8402c; --shadow-rgb: 13, 32, 44; --dots-img: url("./assets/dot-grid.svg");
+    --hero-img: url("./assets/hero-bg.svg"); --px-img: url("./assets/pixel-blocks.jpg");
     --ink: #0d202c;
     --ink-warm: #2b2719;
     --muted: #5b6b7d;
@@ -114,7 +112,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
     -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
     border-radius: 22px;
   }
-  .logo { display: block; width: 116px; height: 24px; background: url("assets/logo.svg") no-repeat left center / contain; }
+  .logo { display: block; width: 116px; height: 24px; background: url("./assets/logo.svg") no-repeat left center / contain; }
   .nav ul { display: flex; gap: 36px; margin: 0; padding: 0; list-style: none; font-family: var(--ui); font-size: 15px; }
   .nav ul a { color: rgba(255,255,255,.5); transition: color .15s ease; }
   .nav ul a:hover, .nav ul a[aria-current] { color: #fff; }
@@ -228,7 +226,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   .partner i, .mstory i.go { font-style: normal; color: rgba(var(--ink-rgb),.3); transition: transform .2s ease, color .2s ease; }
   .partner:hover i, .mstory:hover i.go { color: var(--ink); transform: translateX(2px); }
   .feat { display: block; padding: 14px 18px 16px; background: var(--paper); color: var(--ink); }
-  .feat .plate { position: relative; height: 68px; margin-bottom: 12px; border-radius: 10px; overflow: hidden; background: #121721 url("assets/pixel-blocks.jpg") 30% 45% / 220% auto; }
+  .feat .plate { position: relative; height: 68px; margin-bottom: 12px; border-radius: 10px; overflow: hidden; background: #121721 url("./assets/pixel-blocks.jpg") 30% 45% / 220% auto; }
   .feat .plate em { position: absolute; left: 10px; bottom: 8px; font-style: normal; font-size: 10.5px; font-weight: 500; letter-spacing: .6px; color: #fff; }
   .feat .plate b { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 22px; font-weight: 700; letter-spacing: -.5px; color: #fff; }
   .feat > b { display: block; font-size: 14px; font-weight: 500; }
@@ -409,7 +407,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   .end.full .end-foot .inner { opacity: 1; transform: none; pointer-events: auto; transition-delay: .2s; }
   .end-foot .inner { width: 100%; max-width: var(--frame); margin: 0 auto; padding: 0 24px; }
   .footer-top { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 32px; }
-  .logo-ink { display: block; width: 116px; height: 24px; background: var(--ink); -webkit-mask: url("assets/logo.svg") no-repeat left center / contain; mask: url("assets/logo.svg") no-repeat left center / contain; }
+  .logo-ink { display: block; width: 116px; height: 24px; background: var(--ink); -webkit-mask: url("./assets/logo.svg") no-repeat left center / contain; mask: url("./assets/logo.svg") no-repeat left center / contain; }
   .footer-top p { margin: 16px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); max-width: 240px; }
   .end-foot h4 { margin: 0 0 14px; font-size: 13px; font-weight: 500; color: rgba(var(--ink-rgb),.55); }
   .end-foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; font-weight: 500; }
@@ -417,7 +415,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   .wordmark {
     display: block; width: min(100%, calc(30vh * 139.5 / 28.7)); aspect-ratio: 139.5 / 28.7; margin: 64px auto -3.2%;
     background: var(--paper);
-    -webkit-mask: url("assets/logo.svg") no-repeat center / 100% 100%; mask: url("assets/logo.svg") no-repeat center / 100% 100%;
+    -webkit-mask: url("./assets/logo.svg") no-repeat center / 100% 100%; mask: url("./assets/logo.svg") no-repeat center / 100% 100%;
     opacity: .94;
   }
 
@@ -794,8 +792,8 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
     --l1: #3a3a37; --l2: #3a3a37; --l3: #31312f; --l4: #444441;
     --hl-e: #8a8984; --hl-m: #63625e; --lane: #2a2a28; --lane-on: #4c4b48; --lane-flag: #6a3128; --arc: #252523;
     --grey-a: #4f4e4a; --grey-b: #2e2e2c; --grey-c: #4f4e4a; --hit: #f2543d; --shadow-rgb: 0, 0, 0;
-    --dots-img: url("assets/dot-grid-dark.svg");
-    --hero-img: url("assets/hero-bg-dark.svg");
+    --dots-img: url("./assets/dot-grid-dark.svg");
+    --hero-img: url("./assets/hero-bg-dark.svg");
   }
   :root[data-theme="dark"] body:not(.scrolled) .nav .logo { filter: none; }
   :root[data-theme="dark"] body.scrolled .nav > .btn { color: #0d202c; }
@@ -803,10 +801,10 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   .arc .cp.now path { stroke: var(--on-solid); }
   :root[data-theme="dark"] .scene-grid { filter: brightness(.55); }
   /* use-case artwork stays the light gradient: a coloured panel, like the scorecard strip and the arc */
-  :root[data-theme="dark"] .ucc-top::before { background-image: url("assets/hero-bg.svg"); background-color: #fff; }
+  :root[data-theme="dark"] .ucc-top::before { background-image: url("./assets/hero-bg.svg"); background-color: #fff; }
   /* dark gradients band in 8-bit colour; a screen-resolution grain dithers the steps away */
   :root[data-theme="dark"] body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
-    background: url("assets/grain.png") 0 0 / 128px 128px; mix-blend-mode: overlay; opacity: .22; }
+    background: url("./assets/grain.png") 0 0 / 128px 128px; mix-blend-mode: overlay; opacity: .22; }
   :root[data-theme="dark"] .ucc-logo img, :root[data-theme="dark"] .hero-logos img, :root[data-theme="dark"] .logos img { filter: grayscale(1) invert(1); }
   html { transition: background-color .3s ease; }
   body, .card, .fit2, .ucc, .ucc-body, .case, .rail { transition: background-color .3s ease, color .3s ease, border-color .3s ease; }
@@ -839,9 +837,9 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
       <li><button class="nav-trigger" aria-expanded="false" aria-controls="menu-cp" data-menu="cp">Clients &amp; Partners <i class="ph-bold ph-caret-down" aria-hidden="true"></i></button></li>
       <li><button class="nav-trigger" aria-expanded="false" aria-controls="menu-co" data-menu="co">Company <i class="ph-bold ph-caret-down" aria-hidden="true"></i></button></li>
     </ul>
-    <button class="theme-sw" type="button" aria-label="Dark mode" aria-pressed="false"><i class="ph-bold ph-sun" aria-hidden="true"></i><i class="ph-bold ph-moon" aria-hidden="true"></i></button><a href="#contact" class="btn btn-light">Get an AI assurance baseline</a>
+    <a href="#contact" class="btn btn-light">Get an AI assurance baseline</a>
     <div class="menu" id="menu">
-      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="menu-px" width="1" height="1" viewBox="40 340 1300 240" preserveAspectRatio="xMidYMid slice"><image href="assets/pixel-blocks.jpg" width="1820" height="1020"/></pattern></defs></svg>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="menu-px" width="1" height="1" viewBox="40 340 1300 240" preserveAspectRatio="xMidYMid slice"><image href="./assets/pixel-blocks.jpg" width="1820" height="1020"/></pattern></defs></svg>
       <div class="menu-shell"></div>
       <div class="menu-panel" id="menu-cap"><div class="menu-grid cap-grid"><a class="menu-card" href="platform-engineering.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl me"><polygon class="side" points="30,88 70,98 70,102 30,92" fill="url(#menu-px)"/><polygon class="side" points="70,98 110,88 110,92 70,102" fill="url(#menu-px)"/><polygon class="shade" points="30,88 70,98 70,102 30,92"/><polygon class="shade dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88" fill="url(#menu-px)"/><rect class="px" x="98" y="86" width="4" height="4"/></g><g class="sl"><polygon class="side" points="30,64 70,74 70,78 30,68"/><polygon class="side dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/></g><g class="sl"><polygon class="side" points="30,40 70,50 70,54 30,44"/><polygon class="side dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/></g><g class="sl"><polygon class="side" points="30,16 70,26 70,30 30,20"/><polygon class="side dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/></g></svg><b>Platform Engineering</b><span>Will our AI run in production, at a cost we can defend?</span></a><a class="menu-card" href="data-decision-intelligence.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl"><polygon class="side" points="30,88 70,98 70,102 30,92"/><polygon class="side dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/></g><g class="sl me"><polygon class="side" points="30,64 70,74 70,78 30,68" fill="url(#menu-px)"/><polygon class="side" points="70,74 110,64 110,68 70,78" fill="url(#menu-px)"/><polygon class="shade" points="30,64 70,74 70,78 30,68"/><polygon class="shade dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64" fill="url(#menu-px)"/><rect class="px" x="98" y="62" width="4" height="4"/></g><g class="sl"><polygon class="side" points="30,40 70,50 70,54 30,44"/><polygon class="side dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/></g><g class="sl"><polygon class="side" points="30,16 70,26 70,30 30,20"/><polygon class="side dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/></g></svg><b>Data &amp; Decision Intelligence</b><span>Does our AI understand how our business works?</span></a><a class="menu-card" href="agents-enterprise-autonomy.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl"><polygon class="side" points="30,88 70,98 70,102 30,92"/><polygon class="side dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/></g><g class="sl"><polygon class="side" points="30,64 70,74 70,78 30,68"/><polygon class="side dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/></g><g class="sl me"><polygon class="side" points="30,40 70,50 70,54 30,44" fill="url(#menu-px)"/><polygon class="side" points="70,50 110,40 110,44 70,54" fill="url(#menu-px)"/><polygon class="shade" points="30,40 70,50 70,54 30,44"/><polygon class="shade dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40" fill="url(#menu-px)"/><rect class="px" x="98" y="38" width="4" height="4"/></g><g class="sl"><polygon class="side" points="30,16 70,26 70,30 30,20"/><polygon class="side dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/></g></svg><b>Agents &amp; Enterprise Autonomy</b><span>Can AI complete real work, safely, inside our systems?</span></a><a class="menu-card" href="ai-native-experiences.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl"><polygon class="side" points="30,88 70,98 70,102 30,92"/><polygon class="side dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/></g><g class="sl"><polygon class="side" points="30,64 70,74 70,78 30,68"/><polygon class="side dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/></g><g class="sl"><polygon class="side" points="30,40 70,50 70,54 30,44"/><polygon class="side dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/></g><g class="sl me"><polygon class="side" points="30,16 70,26 70,30 30,20" fill="url(#menu-px)"/><polygon class="side" points="70,26 110,16 110,20 70,30" fill="url(#menu-px)"/><polygon class="shade" points="30,16 70,26 70,30 30,20"/><polygon class="shade dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16" fill="url(#menu-px)"/><rect class="px" x="98" y="14" width="4" height="4"/></g></svg><b>AI-Native Experiences</b><span>Will customers and staff use our AI, and trust it?</span></a><a class="menu-card wide" href="ai-assurance-governance.html" aria-current="page"><svg class="stack all" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl as" style="--d:0ms"><polygon class="side" points="30,88 70,98 70,102 30,92" fill="url(#menu-px)"/><polygon class="side" points="70,98 110,88 110,92 70,102" fill="url(#menu-px)"/><polygon class="shade" points="30,88 70,98 70,102 30,92"/><polygon class="shade dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/><polygon class="tint" points="70,78 110,88 70,98 30,88"/><rect class="px" x="98" y="86" width="4" height="4"/></g><g class="sl as" style="--d:60ms"><polygon class="side" points="30,64 70,74 70,78 30,68" fill="url(#menu-px)"/><polygon class="side" points="70,74 110,64 110,68 70,78" fill="url(#menu-px)"/><polygon class="shade" points="30,64 70,74 70,78 30,68"/><polygon class="shade dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/><polygon class="tint" points="70,54 110,64 70,74 30,64"/><rect class="px" x="98" y="62" width="4" height="4"/></g><g class="sl as" style="--d:120ms"><polygon class="side" points="30,40 70,50 70,54 30,44" fill="url(#menu-px)"/><polygon class="side" points="70,50 110,40 110,44 70,54" fill="url(#menu-px)"/><polygon class="shade" points="30,40 70,50 70,54 30,44"/><polygon class="shade dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/><polygon class="tint" points="70,30 110,40 70,50 30,40"/><rect class="px" x="98" y="38" width="4" height="4"/></g><g class="sl as" style="--d:180ms"><polygon class="side" points="30,16 70,26 70,30 30,20" fill="url(#menu-px)"/><polygon class="side" points="70,26 110,16 110,20 70,30" fill="url(#menu-px)"/><polygon class="shade" points="30,16 70,26 70,30 30,20"/><polygon class="shade dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/><polygon class="tint" points="70,6 110,16 70,26 30,16"/><rect class="px" x="98" y="14" width="4" height="4"/></g></svg><span class="wide-copy"><b>AI Assurance &amp; Governance</b>Can our AI be trusted, and can we prove it? Spans every layer.<em class="here" style="display:flex">You are here</em></span></a></div><div class="menu-foot"><span class="tile"><i class="ph-duotone ph-stack" aria-hidden="true"></i></span><div><b>Not sure which layer is failing?</b>A Platform Review maps where you are on all five.</div><a class="btn" href="#contact">Book a review</a></div></div>
       <div class="menu-panel" id="menu-ind"><div class="menu-grid ind-grid"><div class="ind-list" id="ind-list"></div><div class="ind-subs" id="ind-subs"></div></div><div class="menu-foot"><span class="tile"><i class="ph-duotone ph-compass" aria-hidden="true"></i></span><div><b>Don’t see your industry?</b>Every engagement starts from your systems, not a template.</div><a class="btn" href="#contact">Talk to us</a></div></div>
@@ -899,7 +897,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
         <svg viewBox="0 0 1216 660" aria-hidden="true">
           <defs>
             <pattern id="arc-tex" patternUnits="userSpaceOnUse" x="58" y="40" width="1100" height="620">
-              <image href="assets/pixel-blocks.jpg" width="1100" height="620" preserveAspectRatio="xMidYMid slice"></image>
+              <image href="./assets/pixel-blocks.jpg" width="1100" height="620" preserveAspectRatio="xMidYMid slice"></image>
             </pattern>
             <mask id="arc-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1216" height="660">
               <path id="arc-fillpath" fill="none" stroke="#fff" stroke-width="70" stroke-linecap="round"></path>
@@ -972,7 +970,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   </div>
 </main>
 
-<script src="assets/hairline/kernel.js"></script>
+<script src="./assets/hairline/kernel.js"></script>
 <script type="module">
   import { mountFigure } from "./assets/hairline/devx-figs.js";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1122,7 +1120,7 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   steps.forEach((st, i) => {
     const btn = document.createElement("button");
     btn.className = "step"; btn.type = "button"; btn.setAttribute("role", "tab");
-    btn.innerHTML = `<div class="step-top"><span class="step-name"><img src="assets/seal-check.svg" alt="">${st.name}</span><span class="step-weeks">${st.weeks}</span></div>
+    btn.innerHTML = `<div class="step-top"><span class="step-name"><img src="./assets/seal-check.svg" alt="">${st.name}</span><span class="step-weeks">${st.weeks}</span></div>
       <div class="step-body"><div><h3>${st.title}</h3><p>${st.body}</p></div></div>`;
     btn.addEventListener("click", () => items[i].scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" }));
     btn.addEventListener("keydown", (e) => {
@@ -1411,17 +1409,6 @@ if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";docume
   addEventListener("resize", frame);
   frame();
 
-
-  /* ---------- light / dark ---------- */
-  const themeSw = document.querySelector(".theme-sw");
-  const syncSw = () => themeSw.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === "dark"));
-  themeSw.addEventListener("click", () => {
-    const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = t;
-    try { localStorage.setItem("devx-theme", t); } catch (e) {}
-    syncSw();
-  });
-  syncSw();
 
 </script>
 </body>
