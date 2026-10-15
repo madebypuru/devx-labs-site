@@ -1,0 +1,1428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>(function(){var t;try{t=localStorage.getItem("devx-theme")}catch(e){}
+if(!t)t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enterprise AI Agents and Agentic Workflow Automation | devx</title>
+<meta name="description" content="AI agents that plan, call your systems and complete workflow steps, with permissions, approvals and audit trails your risk team signs off.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..500,0..100&family=Geist:wght@400..600&family=Inter:opsz,wght@14..32,300..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/duotone/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="assets/hairline/devx-figs.css">
+<style>
+  :root {
+
+    --paper: #fff; --paper-rgb: 255, 255, 255; --ink-rgb: 13, 32, 44; --tint-rgb: 239, 239, 237;
+    --solid: #121721; --on-solid: #fff;
+    --t1: #fcfcfb; --t2: #fbfbfa; --t3: #f6f6f5; --t4: #f2f3f5;
+    --side: #f1f1ef; --side-dk: #e6e6e3; --edge: #aeb3ba; --guide: #c9ccd1;
+    --l1: #dbdee5; --l2: #e0e3eb; --l3: #eceef2; --l4: #d9dce2;
+    --hl-e: #999ea8; --hl-m: #b9bdc6; --lane: #efeeea; --lane-on: #c3c6cc; --lane-flag: #eab3a8; --arc: #ebebe7;
+    --grey-a: #c1c3c4; --grey-b: #ecebe7; --grey-c: #c3c7cd; --t5: #f4f4f2; --hit: #c8402c; --shadow-rgb: 13, 32, 44; --dots-img: url("assets/dot-grid.svg");
+    --hero-img: url("assets/hero-bg.svg"); --px-img: url("assets/pixel-blocks.jpg");
+    --ink: #0d202c;
+    --ink-warm: #2b2719;
+    --muted: #5b6b7d;
+    --faint: rgba(13, 32, 44, .5);
+    --ghost: #a3a9b0;
+
+    --bg: #ffffff;
+    --band: #f8f8f7;
+    --line: #e5e8ed;
+    --line-strong: rgba(0, 0, 0, .17);
+
+    --pixel: #f2543d;
+    /* the shared palette: soft for tints and fills, base for ink-on-top accents */
+    --soft-blue: #cae0ff; --soft-green: #c6ecc6; --soft-orange: #ffd0bc; --soft-pink: #ffd1dd;
+    --base-blue: #497cfd; --base-green: #6fda75; --base-orange: #fc6b33; --base-pink: #fa82a6;
+    --grad: linear-gradient(180deg, #6a9afa 0%, #86adf1 27%, #f59f81 59%, #f69fc2 79%, #fbbfd7 100%);
+    --pill-grad: linear-gradient(118deg, #fc88ab 1%, #fa8682 34%, #9277eb 78%, #7494ed 105%);
+
+    --serif: "Cooper Lt BT", "Cooper BT", "Fraunces", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --ui: "Geist", "Inter", system-ui, sans-serif;
+
+    --frame: 1216px;
+    --gutter: 16px;
+    --radius-lg: 28px;
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 24px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  :focus-visible { outline: 2px solid #6a9afa; outline-offset: 3px; border-radius: 6px; }
+
+  .serif {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "opsz" 72;
+    letter-spacing: -0.01em;
+  }
+  .eyebrow {
+    font-size: 14px; line-height: 22px; font-weight: 500;
+    letter-spacing: .2px; text-transform: uppercase;
+    color: rgba(var(--ink-rgb), .5);
+    display: inline-block;
+  }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 44px; padding: 0 14px 0 18px; border-radius: 12px;
+    background: var(--solid); color: var(--on-solid);
+    font-size: 16px; font-weight: 500; letter-spacing: -.1px; white-space: nowrap;
+    box-shadow: inset 0 1px 0 rgba(var(--paper-rgb),.12), 0 2px 4px -2px rgba(0,0,0,.35), 0 0 0 1px var(--solid);
+    transition: transform .15s ease, box-shadow .2s ease;
+  }
+  .btn::after { content: "›"; font-size: 1.2em; line-height: 1; transform: translateY(-1px); transition: transform .2s cubic-bezier(.32,.72,0,1); }
+  .btn:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(var(--paper-rgb),.12), 0 8px 14px -8px rgba(0,0,0,.4), 0 0 0 1px var(--solid); }
+  /* on a dark surface (the nav once it becomes the dark pill) the same button turns white */
+  body.scrolled .nav > .btn { background: #fff; color: var(--ink); box-shadow: 0 2px 4px -2px rgba(0,0,0,.2), 0 0 0 1px rgba(var(--ink-rgb),.08); }
+  .btn:hover::after { transform: translate(2px, -1px); }
+  .btn:active { transform: none; }
+  .nav .btn { height: 36px; padding: 0 10px 0 14px; border-radius: 10px; font-size: 14px; }
+
+  /* ---------- nav ---------- */
+  .nav-wrap { position: fixed; inset: 16px var(--gutter) auto; z-index: 50; display: flex; justify-content: center; pointer-events: none; }
+  .nav {
+    pointer-events: auto;
+    transition: background .4s ease, max-width .5s cubic-bezier(.32,.72,0,1), padding .5s cubic-bezier(.32,.72,0,1), -webkit-backdrop-filter .4s ease, backdrop-filter .4s ease;
+    width: 100%; max-width: calc(var(--frame) - 84px); height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 13px 0 28px;
+    background: rgba(0,0,0,.77);
+    -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%);
+    border-radius: 22px;
+  }
+  .logo { display: block; width: 116px; height: 24px; background: url("assets/logo.svg") no-repeat left center / contain; }
+  .nav ul { display: flex; gap: 36px; margin: 0; padding: 0; list-style: none; font-family: var(--ui); font-size: 15px; }
+  .nav ul a { color: rgba(255,255,255,.5); transition: color .15s ease; }
+  .nav ul a:hover, .nav ul a[aria-current] { color: #fff; }
+  .nav .logo { transition: filter .4s ease; }
+  /* at the top of the page the header is just type on the hero */
+  body:not(.scrolled) .nav { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; max-width: var(--frame); padding: 0 0 0 4px; }
+  body:not(.scrolled) .nav .logo { filter: brightness(0) saturate(100%) invert(9%) sepia(19%) saturate(1500%) hue-rotate(165deg); }
+  body:not(.scrolled) .nav ul a { color: rgba(var(--ink-rgb),.55); }
+  body:not(.scrolled) .nav ul a:hover, body:not(.scrolled) .nav ul a[aria-current] { color: var(--ink); }
+
+
+  /* ---------- nav menus: one shared panel that resizes and slides between menus (studied from AccessGrid) ---------- */
+  .nav ul li { position: relative; }
+  .nav-trigger { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; margin: -8px -10px; border-radius: 10px; color: rgba(255,255,255,.5); transition: color .15s ease, background .15s ease; }
+  .nav-trigger:hover, .nav-trigger[aria-expanded="true"], .nav-trigger.current { color: #fff; }
+  .nav-trigger[aria-expanded="true"] { background: rgba(255,255,255,.1); }
+  .nav-trigger:focus-visible { outline: 2px solid #6a9afa; outline-offset: 2px; }
+  .nav-trigger i { font-size: 12px; opacity: .7; transition: transform .3s cubic-bezier(.32,.72,0,1); }
+  .nav-trigger[aria-expanded="true"] i { transform: rotate(180deg); }
+  body:not(.scrolled) .nav-trigger { color: rgba(var(--ink-rgb),.55); }
+  body:not(.scrolled) .nav-trigger:hover, body:not(.scrolled) .nav-trigger[aria-expanded="true"], body:not(.scrolled) .nav-trigger.current { color: var(--ink); }
+  body:not(.scrolled) .nav-trigger[aria-expanded="true"] { background: rgba(var(--ink-rgb),.06); }
+
+  .nav { position: relative; }
+  .menu { position: absolute; top: calc(100% + 10px); left: 0; z-index: 60; pointer-events: none; opacity: 0; transform: translateY(-6px) scale(.96); transform-origin: var(--ox, 50%) 0;
+    transition: opacity .25s ease, transform .35s cubic-bezier(.32,.72,0,1), left .35s cubic-bezier(.32,.72,0,1), width .35s cubic-bezier(.32,.72,0,1), height .35s cubic-bezier(.32,.72,0,1); }
+  .menu.open { opacity: 1; transform: none; pointer-events: auto; }
+  .menu.instant { transition: opacity .25s ease, transform .35s cubic-bezier(.32,.72,0,1); }
+  .menu-shell { position: absolute; inset: 0; border-radius: 18px; background: var(--t3); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    box-shadow: 0 24px 40px -20px rgba(var(--shadow-rgb),.3), 0 10px 24px rgba(var(--shadow-rgb),.06), 0 1px 1px rgba(var(--shadow-rgb),.14), 0 0 0 1px rgba(var(--ink-rgb),.05); }
+  .menu-panel { position: absolute; top: 0; left: 0; padding: 4px; opacity: 0; pointer-events: none; visibility: hidden; transform: translateX(var(--dx, 0));
+    transition: opacity .2s ease, transform .3s cubic-bezier(.32,.72,0,1), visibility 0s .3s; }
+  .menu-panel.on { opacity: 1; pointer-events: auto; visibility: visible; transform: none; transition: opacity .2s ease .05s, transform .3s cubic-bezier(.32,.72,0,1), visibility 0s; }
+  .menu-grid { display: grid; gap: 1px; border-radius: 14px; overflow: hidden; background: rgba(var(--ink-rgb),.07); box-shadow: 0 1px 1px rgba(var(--shadow-rgb),.06), 0 0 0 1px rgba(var(--ink-rgb),.05); }
+  .menu-card { display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 16px; background: var(--paper); color: var(--ink); transition: background .2s ease; }
+  .menu-card:hover, .menu-card:focus-visible { background: var(--t2); outline: none; }
+  .menu-card b { font-size: 15px; font-weight: 500; letter-spacing: -.15px; }
+  .menu-card > span { font-size: 13px; line-height: 1.45; color: var(--muted); }
+  .menu-card .here { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-style: normal; font-size: 12px; color: var(--ink); }
+  .menu-card .here::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--pixel); }
+  .menu-foot { display: flex; align-items: center; gap: 14px; padding: 12px 8px 8px 10px; }
+  .menu-foot .tile { width: 40px; height: 40px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.08); font-size: 18px; }
+  .menu-foot .btn { height: 32px; padding: 0 8px 0 12px; border-radius: 10px; font-size: 13px; }
+  .menu-foot div { flex: 1; font-size: 13px; line-height: 1.4; color: var(--muted); }
+  .menu-foot div b { display: block; font-size: 14px; font-weight: 500; color: var(--ink); }
+
+  /* capabilities: the practice stack, each card lifting its own layer */
+  .cap-grid { grid-template-columns: repeat(2, 290px); }
+  .cap-grid .wide { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 18px; }
+  .cap-grid .wide-copy { font-size: 13px; line-height: 1.45; color: var(--muted); }
+  .cap-grid .wide-copy b { display: block; margin-bottom: 2px; color: var(--ink); }
+  .stack { width: 104px; height: 78px; margin: -6px 0 8px -8px; overflow: visible; }
+  .cap-grid .wide .stack { margin: -4px 0; flex: none; }
+  .stack .sl { transition: transform .5s cubic-bezier(.32,.72,0,1); }
+  .stack .top { fill: var(--paper); stroke: var(--edge); stroke-width: .75; stroke-linejoin: round; }
+  .stack .side { fill: var(--side); stroke: var(--edge); stroke-width: .75; stroke-linejoin: round; }
+  .stack .side.dk { fill: var(--side-dk); }
+  .stack .me .top, .stack .me .side { fill: url(#menu-px); stroke: rgba(var(--ink-rgb),.25); }
+  .stack .shade { fill: rgba(var(--ink-rgb),.1); } .stack .shade.dk { fill: rgba(var(--ink-rgb),.22); }
+  .stack .px { fill: var(--pixel); opacity: 0; transition: opacity .3s ease; }
+  .stack .guide line { stroke: var(--guide); stroke-width: .75; stroke-dasharray: 2 3; }
+  .stack .span line { stroke: var(--edge); stroke-width: .75; stroke-dasharray: 2 2; }
+  .menu-card:hover .stack .me, .menu-card:focus-visible .stack .me { transform: translateY(-7px); }
+  .menu-card:hover .stack .px, .menu-card:focus-visible .stack .px { opacity: 1; }
+  .menu-card:hover .stack .sl:not(.me) { transform: translateY(1px); }
+
+  /* industries and company: icon rows */
+  .row-grid { grid-template-columns: repeat(2, 264px); }
+  .company-grid { grid-template-columns: 300px; }
+  .menu-row { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: var(--paper); color: var(--ink); font-size: 14px; font-weight: 500; line-height: 1.3; transition: background .2s ease; }
+  .menu-row:hover, .menu-row:focus-visible { background: var(--t2); outline: none; }
+  .menu-row .ic, .menu-foot .tile { display: grid; place-items: center; flex: none; color: var(--ink); }
+  .menu-row .ic { width: 34px; height: 34px; border-radius: 9px; font-size: 19px; background: var(--t5); transition: background .2s ease; }
+  .menu-row .ic i, .menu-foot .tile i { display: inline-block; line-height: 1; }
+  /* at rest the icons are ink; on hover they take the devx gradient, like the guardrail icons */
+  .menu-row:hover .ic i::before, .menu-row:hover .ic i::after, .menu-row:focus-visible .ic i::before, .menu-row:focus-visible .ic i::after,
+  .menu-foot:hover .tile i::before, .menu-foot:hover .tile i::after {
+    background: linear-gradient(135deg, #6a9afa 0%, #86adf1 27%, #f59f81 59%, #f69fc2 79%, #fbbfd7 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .menu-row:hover .ic { background: rgba(var(--tint-rgb),.9); }
+  .menu-row small { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 400; color: var(--muted); }
+
+
+  /* industries: the list on the left; the sub-verticals of the one under the pointer on the right */
+  .ind-grid { grid-template-columns: 250px 290px; }
+  .ind-list, .ind-subs { background: var(--paper); display: flex; flex-direction: column; }
+  .ind-list .menu-row + .menu-row { border-top: 1px solid rgba(var(--ink-rgb),.07); }
+  .ind-list .menu-row .go, .sub-row .go { margin-left: auto; font-style: normal; color: rgba(var(--ink-rgb),.25); transition: transform .2s ease, color .2s ease; }
+  .ind-list .menu-row.on { background: var(--t2); }
+  .ind-list .menu-row.on .go, .ind-list .menu-row:hover .go { color: var(--pixel); transform: translateX(2px); }
+  .ind-list .menu-row.on .ic i::before, .ind-list .menu-row.on .ic i::after {
+    background: linear-gradient(135deg, #6a9afa 0%, #86adf1 27%, #f59f81 59%, #f69fc2 79%, #fbbfd7 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .ind-subs { border-left: 1px solid rgba(var(--ink-rgb),.07); padding: 6px 0; }
+  .ind-subs .head { padding: 10px 18px 6px; font-size: 11.5px; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; color: rgba(var(--ink-rgb),.45); }
+  .sub-row { display: flex; align-items: center; gap: 12px; padding: 11px 18px; font-size: 14px; font-weight: 500; color: var(--ink); transition: background .2s ease; animation: sub-in .35s cubic-bezier(.32,.72,0,1) both; }
+  .sub-row:hover, .sub-row:focus-visible { background: var(--t2); outline: none; }
+  .sub-row:hover .go { color: var(--pixel); transform: translateX(2px); }
+  .sub-row.all { margin-top: auto; font-weight: 400; color: var(--muted); border-top: 1px solid rgba(var(--ink-rgb),.07); }
+  @keyframes sub-in { from { opacity: 0; transform: translateX(8px); } }
+
+  /* clients and partners: stories on the left, partners on the right */
+  .cp-grid { grid-template-columns: 340px 280px; }
+  .cp-col { display: grid; align-content: start; background: var(--paper); }
+  .cp-col > * + * { border-top: 1px solid rgba(var(--ink-rgb),.07); }
+  .cp-grid .head { padding: 14px 18px 6px; background: var(--paper); font-size: 11.5px; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; color: rgba(var(--ink-rgb),.45); }
+  .partner { display: grid; grid-template-columns: 96px 1fr 14px; align-items: center; gap: 12px; padding: 12px 18px; background: var(--paper); color: var(--ink); transition: background .2s ease; }
+  .partner:hover, .partner:focus-visible { background: var(--t2); outline: none; }
+  .partner b { font-size: 14px; font-weight: 600; letter-spacing: -.2px; }
+  .partner span { font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+  .partner i, .mstory i.go { font-style: normal; color: rgba(var(--ink-rgb),.3); transition: transform .2s ease, color .2s ease; }
+  .partner:hover i, .mstory:hover i.go { color: var(--ink); transform: translateX(2px); }
+  .feat { display: block; padding: 14px 18px 16px; background: var(--paper); color: var(--ink); }
+  .feat .plate { position: relative; height: 68px; margin-bottom: 12px; border-radius: 10px; overflow: hidden; background: #121721 url("assets/pixel-blocks.jpg") 30% 45% / 220% auto; }
+  .feat .plate em { position: absolute; left: 10px; bottom: 8px; font-style: normal; font-size: 10.5px; font-weight: 500; letter-spacing: .6px; color: #fff; }
+  .feat .plate b { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 22px; font-weight: 700; letter-spacing: -.5px; color: #fff; }
+  .feat > b { display: block; font-size: 14px; font-weight: 500; }
+  .feat > span { display: block; margin-top: 2px; font-size: 12.5px; color: var(--muted); }
+  .mstory { display: flex; align-items: center; gap: 12px; padding: 11px 18px; background: var(--paper); color: var(--ink); transition: background .2s ease; }
+  .mstory:hover, .mstory:focus-visible { background: var(--t2); outline: none; }
+  .mstory .mk { flex: none; width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--solid); color: var(--on-solid); font-size: 12px; }
+  .mstory b { display: block; font-size: 13.5px; font-weight: 500; }
+  .mstory span span { font-size: 12px; color: var(--muted); }
+  .mstory .m { margin-left: auto; font-size: 16px; white-space: nowrap; }
+
+  /* ---------- ruled frame (Aside) ---------- */
+  .rule { border-top: 0; }
+  .frame { max-width: calc(var(--frame) + 2px); margin: 0 auto; background: var(--bg); }
+  .rule:has(> .frame.band) { background: var(--band); }
+  .frame.band { background: var(--band); }
+  .section { padding: 120px 112px; }
+  .section-head { max-width: 720px; margin-bottom: 56px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head .eyebrow { margin-bottom: 20px; }
+  .h2 { margin: 0; font-size: 44px; line-height: 1.14; color: var(--ink); }
+  .section-head p { margin: 20px 0 0; color: var(--muted); }
+  .section-head.center p { margin-left: auto; margin-right: auto; max-width: 600px; }
+
+  /* what we build */
+  /* what we build: a bento of four cards (after Dia) */
+  /* what we build: one rounded group of white cells split by hairlines, the nav's construction at page scale */
+  .bento { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-areas: "a a a b b" "c c d d d"; gap: 1px;
+    border-radius: 24px; overflow: hidden; background: rgba(var(--ink-rgb),.08); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06); }
+  .bento .card:nth-child(1) { grid-area: a; } .bento .card:nth-child(2) { grid-area: b; }
+  .bento .card:nth-child(3) { grid-area: c; } .bento .card:nth-child(4) { grid-area: d; }
+  .card { position: relative; display: flex; flex-direction: column; padding: 40px 40px 0; background: var(--paper); transition: background .3s ease; }
+  .card:hover { background: var(--t1); }
+  .card h3 { margin: 0; font-size: 24px; line-height: 1.2; font-weight: 500; letter-spacing: -.4px; color: var(--ink); }
+  .card p { margin: 10px 0 8px; max-width: 520px; font-size: 17px; line-height: 1.5; color: var(--muted); }
+  .card .fig { width: 100%; max-width: 600px; margin: auto;   /* auto: a figure in a stretched card sits centred in the space left, not stuck under the text */
+    aspect-ratio: 484 / 375; --hairline-plate: var(--paper); }
+  .card .fig > [data-hairline] { scale: 1.32; transform-origin: 50% 55%; }
+  .card.wide .fig { max-width: 640px; }
+  .card .fig[data-fig="river"] > [data-hairline] { scale: 1.5; }
+  .card .fig[data-fig="readout"] > [data-hairline] { scale: 1.08; }
+  .card .fig[data-fig="block"] > [data-hairline] { scale: 1.18; transform-origin: 50% 70%; }
+  .plate p strong { color: var(--ink); font-weight: 500; }
+
+  /* how we work (Figma 228:5033) */
+  .how { padding-top: 104px; padding-bottom: 48px; }
+  .how-head { margin-bottom: 42px; }
+  .how-head .eyebrow { margin-bottom: 24px; }
+  .how-grid { display: grid; grid-template-columns: minmax(0, 627fr) minmax(0, 751fr); gap: 56px; }
+  .how-left { position: sticky; top: calc(50vh - var(--frame-h) / 2); align-self: start; }
+  .how { --frame-h: min(560px, calc(100vh - 140px)); }
+  .stepper { display: flex; gap: 22px; }
+  .rail { flex: 0 0 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 14px 0; border: 1px solid rgba(var(--ink-rgb),.17); border-radius: 999px; background: var(--paper); }
+  .rail i { display: block; width: 11px; flex: 0 0 11px; border-radius: 4px; background: var(--grey-a); transition: flex-grow .6s cubic-bezier(.32,.72,0,1), background .3s ease; }
+  .rail i.on { flex: 1 0 11px; background: var(--grad); }
+  .step-list { flex: 1; display: flex; flex-direction: column; gap: 22px; min-width: 0; padding: 14px 0; }
+  .step { text-align: left; width: 100%; border-radius: 18px; padding: 0 10px; transition: background .3s ease, padding .3s ease; }
+  .step-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .step-name { display: inline-flex; align-items: center; gap: 8px; font-size: 16px; line-height: 1.25; font-weight: 500; letter-spacing: .04px; text-transform: uppercase; color: rgba(var(--ink-rgb),.3); transition: color .2s ease; }
+  .step-name img { width: 26px; height: 26px; display: none; }
+  .step-weeks { font-size: 16px; font-weight: 500; letter-spacing: .04px; text-transform: uppercase; color: rgba(var(--ink-rgb),.6); display: none; }
+  .step-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s cubic-bezier(.32,.72,0,1); }
+  .step-body > div { overflow: hidden; }
+  .step-body h3 { margin: 30px 0 16px; font-size: 24px; line-height: 1.1; font-weight: 400; letter-spacing: -.52px; color: var(--ink-warm); }
+  .step-body p { margin: 0; font-size: 17px; line-height: 1.4; color: rgba(var(--ink-rgb),.75); }
+  .step:hover .step-name { color: rgba(var(--ink-rgb),.6); }
+  .step[aria-selected="true"] { background: rgba(var(--tint-rgb),.43); padding: 22px; }
+  .step[aria-selected="true"] .step-name { color: var(--ink); }
+  .step[aria-selected="true"] .step-name img, .step[aria-selected="true"] .step-weeks { display: inline-flex; }
+  .step[aria-selected="true"] .step-body { grid-template-rows: 1fr; }
+  .how-right { display: flex; flex-direction: column; gap: 0; }
+  .how-item { margin: 0; min-height: 72vh; display: flex; align-items: center; }
+  .how-item:first-child { min-height: 0; padding-bottom: calc(50vh - var(--frame-h) / 2); }
+  .how-item:last-child { min-height: 0; padding-top: calc(50vh - var(--frame-h) / 2); }
+  /* the step plate: a white drawing inside a blurred pixel-gradient frame */
+  .step-frame { position: relative; width: 100%; aspect-ratio: 751 / 699; max-height: calc(100vh - 140px); margin-left: auto; padding: 6px; border-radius: 24px; background: var(--t3); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06), 0 24px 40px -28px rgba(var(--shadow-rgb),.25); display: grid; }
+  .step-frame .fig { width: 100%; height: 100%; border-radius: 18px; box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06); background: var(--paper) var(--dots-img) center / 751px auto; --hairline-plate: var(--paper); display: grid; place-items: center; }
+  .step-frame .fig > [data-hairline] { width: min(100%, calc(var(--frame-h) * .865 * 1.25)); }
+  .how { --frame-h: 560px; }
+  .how-detail { display: none; }
+
+  /* outcomes: a semicircular track the scroll paints in (after Valley's compare arc) */
+  .outcomes { padding-top: 0; padding-bottom: 0; }
+  .arc-track { height: 260vh; position: relative; }
+  .arc-sticky { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 72px; }
+  .arc-head { text-align: center; margin-bottom: 56px; }
+  .arc-head .eyebrow { margin-bottom: 20px; }
+  .arc-head h2 { margin: 0; font-size: 44px; line-height: 1.12; color: var(--ink); }
+  .arc { position: relative; aspect-ratio: 1216 / 660; width: min(calc(100% + 112px), calc((100vh - 330px) * 1216 / 660)); margin: 0 -56px; }
+  .arc svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .arc .base { fill: none; stroke: var(--arc); stroke-width: 70; stroke-linecap: round; }
+  .arc .rail { fill: none; stroke: rgba(var(--paper-rgb),.75); stroke-width: 1.5; }
+  .arc .rail-base { fill: none; stroke: rgba(var(--ink-rgb),.12); stroke-width: 1.5; stroke-dasharray: 3 6; }
+  .arc .cp circle { fill: var(--paper); stroke: rgba(var(--ink-rgb),.18); stroke-width: 1.5; transition: fill .35s ease, stroke .35s ease, r .35s ease; }
+  .arc .cp path { fill: none; stroke: var(--solid); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transition: opacity .3s ease; }
+  .arc .cp .dot { fill: rgba(var(--ink-rgb),.28); stroke: none; transition: opacity .3s ease; }
+  .arc .cp.done circle { stroke: var(--paper); }
+  .arc .cp.done path { opacity: 1; }
+  .arc .cp.done .dot { opacity: 0; }
+  .arc .cp.now circle { fill: var(--solid); stroke: var(--paper); }
+  .arc .cp.now path { stroke: var(--paper); }
+  .arc-labels { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+  .arc-labels button { position: absolute; text-align: center; line-height: 1.12; padding: 4px 6px; border-radius: 8px; }
+  .arc-labels .n { display: block; font-size: 12px; letter-spacing: 1.5px; color: rgba(var(--ink-rgb),.45); margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+  .arc-labels .t { display: block; font-size: 19px; font-weight: 450; letter-spacing: -.2px; color: rgba(var(--ink-rgb),.4); transition: color .35s ease; white-space: nowrap; }
+  .arc-labels button.done .t { color: var(--ink); }
+  .arc-labels button:hover .t { color: var(--ink); }
+  /* centred in the arc's inner space, so the readout sits under the checkpoint it belongs to rather than at the floor */
+  .arc-center { position: absolute; left: 50%; top: 41%; transform: translateX(-50%); width: min(560px, 54%); text-align: center; }
+  .arc-center h3 { margin: 0 0 10px; font-size: 32px; line-height: 1; letter-spacing: -.8px; color: var(--ink); }
+  .arc-center > p { margin: 0 auto; max-width: 480px; font-size: 16px; line-height: 1.5; color: var(--muted); }
+  .arc-stat { margin-top: 20px; display: inline-flex; align-items: baseline; gap: 16px; }
+  .arc-stat .from { font-size: 22px; color: var(--ghost); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .arc-stat .arrow { width: 40px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #436bf6, #ea95b6 55%, #ff5d45); align-self: center; }
+  .arc-stat .to { font-size: 34px; color: var(--ink); }
+  .arc-meta { display: block; margin-top: 10px; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; color: var(--faint); }
+  .arc-center .swap { transition: opacity .3s ease, transform .3s ease; }
+  .arc-center.out .swap { opacity: 0; transform: translateY(6px); }
+
+
+  /* proof: client cases. The band arrives as a card, then pins and snaps to fill the screen;
+     scrolling steps through the cases while the gradient slides under them */
+  .proof-track { position: relative; height: calc(100vh + 3 * 80vh); }
+  .proof-sticky { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; overflow: clip; }
+  .proof-band { position: relative; width: min(1392px, calc(100% - 48px)); display: flex; flex-direction: column; justify-content: center;
+    padding: 0 88px; border-radius: 24px; overflow: hidden; isolation: isolate;
+    background: var(--paper) var(--hero-img) var(--bx, 0%) 70% / 170% auto no-repeat;
+    transition: width .7s cubic-bezier(.32,.72,0,1), height .7s cubic-bezier(.32,.72,0,1), border-radius .7s cubic-bezier(.32,.72,0,1), background-position 1.4s cubic-bezier(.32,.72,0,1); }
+  .proof-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(var(--paper-rgb),.6), rgba(var(--paper-rgb),0) 60%); }
+  .proof.full .proof-band { width: 100%; height: 100vh !important; border-radius: 0; }
+  .proof-inner { width: 100%; max-width: 1216px; margin: 0 auto; }
+  .proof-head { text-align: center; margin-bottom: 56px; }
+  .proof-head .eyebrow { margin-bottom: 20px; }
+  .proof-viewport { overflow: hidden; border-radius: 24px; }
+  .proof-rail { display: flex; transition: transform .8s cubic-bezier(.32,.72,0,1); }
+  .case { flex: 0 0 100%; margin: 0; display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; padding: 56px 64px; border-radius: 24px;
+    background: var(--paper); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06), 0 24px 40px -24px rgba(var(--shadow-rgb),.25); }
+  .case blockquote { margin: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+  .case blockquote p { margin: 0; font-size: 32px; line-height: 1.25; letter-spacing: -.5px; color: var(--ink); }
+  .case-by { display: flex; align-items: center; gap: 14px; font-size: 15px; line-height: 1.4; color: var(--muted); }
+  .case-by b { display: block; font-weight: 500; color: var(--ink); }
+  .case-mark { flex: 0 0 48px; height: 48px; border-radius: 10px; display: grid; place-items: center; background: var(--solid); color: var(--on-solid); font-size: 17px; letter-spacing: .5px; }
+  .case .result { display: flex; flex-direction: column; justify-content: center; padding-left: 48px; border-left: 1px solid rgba(var(--ink-rgb),.1); }
+  .case .result .num { font-size: 60px; line-height: 1; letter-spacing: -1.2px; color: var(--ink); }
+  .case .result .what { margin-top: 14px; font-size: 17px; line-height: 1.45; color: var(--muted); }
+  .proof-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 28px; }
+  .proof-nav button { all: unset; cursor: pointer; }
+  .proof-dots { display: flex; gap: 8px; }
+  .proof-dots button { width: 8px; height: 8px; border-radius: 4px; background: rgba(var(--ink-rgb),.22); transition: width .4s cubic-bezier(.32,.72,0,1), background .3s ease; }
+  .proof-dots button[aria-selected="true"] { width: 28px; background: var(--ink); }
+  .proof-arrow { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(var(--paper-rgb),.8); box-shadow: inset 0 0 0 1px rgba(var(--ink-rgb),.1); color: var(--ink); font-size: 16px; transition: background .2s ease; }
+  .proof-arrow:hover { background: var(--paper); }
+  /* faq */
+  .faq { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; }
+  .faq details { border-top: 1px solid var(--line); }
+  .faq details:last-child { border-bottom: 1px solid var(--line); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 24px; padding: 22px 0; font-size: 17px; font-weight: 500; color: var(--ink); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; font-weight: 300; font-size: 22px; color: var(--faint); transition: transform .25s ease; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { margin: -6px 0 24px; max-width: 620px; color: var(--muted); }
+
+  /* the close: the CTA card holds, then snaps full-bleed and the footer comes in */
+  .end { position: relative; }
+  .end-bg { position: sticky; top: 0; height: 100vh; margin-bottom: -100vh; overflow: hidden; pointer-events: none; z-index: 0; }
+  .end-fill {
+    position: absolute; inset: 14vh max(24px, calc((100vw - 1218px) / 2 + 24px)); border-radius: 24px;
+    background: var(--paper) var(--hero-img) center 78% / cover no-repeat;
+    transition: inset .8s cubic-bezier(.32,.72,0,1), border-radius .8s cubic-bezier(.32,.72,0,1);
+  }
+  .end.full .end-fill { inset: 0; border-radius: 0; }
+  .end-cta { position: relative; z-index: 1; display: grid; place-items: center; text-align: center; padding: var(--cta-top, 33vh) 24px 120px; }
+  .end-cta h2 { margin: 0 0 16px; font-size: 60px; line-height: 1.1; letter-spacing: -1px; }
+  .end-cta p { margin: 0 auto 32px; max-width: 520px; color: var(--muted); font-size: 17px; }
+  .end-foot { position: relative; z-index: 1; padding-top: 0; overflow: hidden; }
+  /* the footer only exists once the gradient has taken the screen: it arrives with the snap */
+  .end-foot .inner { opacity: 0; transform: translateY(56px); pointer-events: none; transition: opacity .5s ease, transform .9s cubic-bezier(.32,.72,0,1); }
+  .end.full .end-foot .inner { opacity: 1; transform: none; pointer-events: auto; transition-delay: .2s; }
+  .end-foot .inner { width: 100%; max-width: var(--frame); margin: 0 auto; padding: 0 24px; }
+  .footer-top { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 32px; }
+  .logo-ink { display: block; width: 116px; height: 24px; background: var(--ink); -webkit-mask: url("assets/logo.svg") no-repeat left center / contain; mask: url("assets/logo.svg") no-repeat left center / contain; }
+  .footer-top p { margin: 16px 0 0; font-size: 14px; line-height: 20px; color: var(--muted); max-width: 240px; }
+  .end-foot h4 { margin: 0 0 14px; font-size: 13px; font-weight: 500; color: rgba(var(--ink-rgb),.55); }
+  .end-foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; font-weight: 500; }
+  .end-foot ul a:hover { color: var(--muted); }
+  .wordmark {
+    display: block; width: min(100%, calc(30vh * 139.5 / 28.7)); aspect-ratio: 139.5 / 28.7; margin: 64px auto -3.2%;
+    background: var(--paper);
+    -webkit-mask: url("assets/logo.svg") no-repeat center / 100% 100%; mask: url("assets/logo.svg") no-repeat center / 100% 100%;
+    opacity: .94;
+  }
+
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.32,.72,0,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- the scene: hero → problem → devx, one scorecard ---------- */
+  .scene-track { height: 400vh; position: relative; }
+  .scene-sticky { position: sticky; top: 0; height: 100vh; overflow: clip; isolation: isolate; }
+  .scene-bg { position: absolute; inset: -6%; z-index: -2; background: var(--paper) var(--hero-img) center 35% / cover no-repeat; will-change: transform, filter; }
+  .scene-grid { position: absolute; inset: 0; z-index: -1; background: var(--dots-img) center / 751px auto repeat; opacity: 0; pointer-events: none; }
+  .hero-copy { position: absolute; left: 0; right: 0; top: 0; padding: 150px var(--gutter) 0; text-align: center; z-index: 3; will-change: transform, opacity; }
+  .hero-copy .eyebrow { margin-bottom: 18px; }
+  .hero-copy h1 { margin: 0 auto 20px; font-size: 60px; line-height: 1.16; letter-spacing: -1px; color: var(--ink); }
+  .hero-actions { display: flex; align-items: center; justify-content: center; gap: 28px; }
+  .hero-more { font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(var(--ink-rgb),.25); padding-bottom: 2px; transition: border-color .2s ease; }
+  .hero-more:hover { border-color: var(--ink); }
+  .hero-copy .lead { margin: 0 auto 32px; max-width: 640px; font-size: 19px; line-height: 1.5; color: var(--muted); }
+  .scene-copy { position: absolute; z-index: 3; left: max(var(--gutter), calc((100vw - var(--frame)) / 2 + 24px)); top: 50%; width: min(520px, 44vw); transform: translateY(-50%); opacity: 0; will-change: transform, opacity; }
+  .scene-copy .eyebrow { margin-bottom: 18px; }
+  .scene-copy p { margin: 0; font-size: 42px; line-height: 1.22; letter-spacing: -.6px; }
+  .scene-copy .w { color: var(--ghost); transition: color .3s ease; }
+  .scene-copy .w.on { color: var(--ink); }
+  .scene-copy .w.hit { color: var(--hit); }
+  .scene-cta { margin-top: 32px; opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .5s cubic-bezier(.32,.72,0,1); }
+  .scene.cta .scene-cta { opacity: 1; transform: none; }
+
+  /* shared: copy centred at the top; the visual anchored centre-bottom, never travelling */
+  .scene-copy { position: absolute; z-index: 3; left: 50%; top: 0; width: min(900px, calc(100vw - 32px)); padding-top: clamp(96px, 14vh, 128px); transform: translateX(-50%); text-align: center; opacity: 0; will-change: transform, opacity; }
+  .scene-copy p { font-size: clamp(38px, 4.8vh, 46px); line-height: 1.18; letter-spacing: -.7px; }
+  .scene-cta { margin-top: 22px; }
+  .vis { position: absolute; z-index: 2; left: 50%; bottom: 24px; width: min(1120px, calc(100vw - 48px)); transform: translateX(-50%); will-change: transform, opacity; }
+  /* the frame: frosted glass over the background, so every label stays legible on any part of the gradient */
+  .vis { padding: 28px 32px 24px; border-radius: 24px; background: rgba(var(--paper-rgb),.62); -webkit-backdrop-filter: blur(28px) saturate(1.2); backdrop-filter: blur(28px) saturate(1.2); box-shadow: inset 0 0 0 1px rgba(var(--paper-rgb),.8), 0 1px 2px rgba(var(--shadow-rgb),.04), 0 24px 60px -24px rgba(var(--shadow-rgb),.18); }
+
+  /* shared vocabulary: four aligned columns, numbered labels above, values below */
+  .vis .cols { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .vis .col-label { text-align: center; padding: 0 8px; }
+  .vis .col-label .n { display: block; font-size: 11px; letter-spacing: 1.5px; color: rgba(var(--ink-rgb),.4); margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+  .vis .col-label .t { display: block; font-size: 15px; font-weight: 450; letter-spacing: -.2px; line-height: 1.25; color: rgba(var(--ink-rgb),.55); transition: color .35s ease; }
+  .vis .col-label.flag .t { color: var(--hit); }
+  .vis .col-label.fixed .t { color: var(--ink); }
+  .vis .col-val { text-align: center; padding: 0 8px; }
+  .vis .col-val .metric { display: block; font-size: 12px; color: rgba(var(--ink-rgb),.5); margin-bottom: 4px; }
+  .vis .col-val .v { font-size: 15px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; transition: color .35s ease; }
+  .vis .col-val .was { color: rgba(var(--ink-rgb),.55); font-weight: 400; transition: color .35s ease; }
+  .vis .col-val.flag .was { color: var(--hit); }
+  .vis .col-val .arrow, .vis .col-val .now { display: inline-block; opacity: 0; transform: translateX(-6px); transition: opacity .45s ease, transform .55s cubic-bezier(.32,.72,0,1); }
+  .vis .col-val .arrow { width: 18px; height: 2px; margin: 0 7px; vertical-align: middle; border-radius: 2px; background: linear-gradient(90deg, #6a9afa, #f59f81 60%, #f69fc2); }
+  .vis .col-val.fixed .arrow, .vis .col-val.fixed .now { opacity: 1; transform: none; }
+  .vis .col-val.fixed .was { text-decoration: line-through; text-decoration-thickness: 1px; color: rgba(var(--ink-rgb),.4); }
+
+  /* the readiness KPI: one quiet line under the visual, never louder than the headline */
+  .vis .kpi { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-top: clamp(18px, 3vh, 28px); }
+  .vis .kpi .kick { font-size: 14px; color: var(--muted); }
+  .vis .kpi .num { font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1; letter-spacing: -.4px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .vis .kpi .num small { font-family: var(--sans); font-size: 13px; letter-spacing: 0; color: rgba(var(--ink-rgb),.45); margin-left: 3px; }
+
+  @media (max-width: 900px) {
+    .hero-copy { padding-top: 130px; }
+    .hero-copy h1 { font-size: 44px; }
+    .vis .col-label .t { font-size: 14px; }
+    .vis .col-val .metric { display: none; }
+    .vis .col-val .v { font-size: 13px; white-space: normal; }
+    .vis .col-val .arrow { width: 12px; margin: 0 4px; }
+  }
+  @media (max-width: 640px) {
+    .hero-copy h1 { font-size: 34px; line-height: 1.18; }
+    .hero-copy .lead { font-size: 16px; }
+    .scene-copy p { font-size: 25px; letter-spacing: -.4px; }
+    .vis .kpi .kick { font-size: 13px; }
+    .vis .kpi .num { font-size: 22px; }
+    .vis { width: calc(100vw - 20px); padding: 18px 8px 16px; border-radius: 18px; }
+    .vis .col-label, .vis .col-val { padding: 0 3px; }
+    .vis .col-label .t { font-size: 12px; }
+    .vis .col-val .v { font-size: 12px; }
+    .vis .col-val .arrow, .vis .col-val .now { display: block; margin: 3px auto 0; }
+    .vis .col-val .arrow { width: 14px; }
+  }
+  /* the readiness line: one straight track, four checkpoints on it, names above, numbers below.
+     Drawn like a construction: hairline guides from each name, a hairline outline, a fine 0–5 rule underneath */
+  .vis .track { position: relative; height: 40px; margin: 18px 0 0; }
+  .vis .lane { position: absolute; inset: 0; border-radius: 20px; background: var(--lane); box-shadow: inset 0 0 0 1px rgba(var(--ink-rgb),.1); overflow: hidden; }
+  .vis .lane .today { position: absolute; inset: 0 auto 0 0; width: 28%; border-radius: 20px; background: var(--lane-on); transition: background .4s ease; }
+  .scene.flagged .vis .lane .today { background: var(--lane-flag); }
+  .vis .lane .paint { position: absolute; inset: 0; background: #f59f81 var(--px-img) 0 41% / 132% auto; clip-path: inset(0 100% 0 0 round 20px); }
+  .vis .track .cols { position: absolute; inset: 0; align-items: center; justify-items: center; }
+  /* hairline guide from each name down to its checkpoint */
+  .vis .labels .col-label { position: relative; padding-bottom: 12px; }
+  .vis .labels .col-label::after { content: ""; position: absolute; left: 50%; bottom: -18px; width: 1px; height: 24px; background: linear-gradient(rgba(var(--ink-rgb),0), rgba(var(--ink-rgb),.22)); transition: background .35s ease; }
+  .vis .labels .col-label.flag::after { background: linear-gradient(rgba(200,64,44,0), rgba(200,64,44,.6)); }
+  .vis .cp { position: relative; width: 26px; height: 26px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.16); transition: background-color .35s ease, box-shadow .35s ease; }
+  .vis .cp::before { content: ""; position: absolute; inset: 0; margin: auto; width: 6px; height: 6px; border-radius: 50%; background: rgba(var(--ink-rgb),.3); transition: opacity .3s ease; }
+  .vis .cp::after { content: ""; position: absolute; inset: 0; background: center / 16px 16px no-repeat; opacity: 0; transform: scale(.6); transition: opacity .3s ease, transform .4s cubic-bezier(.32,.72,0,1); }
+  .vis .cp.flag { background-color: #d9442f; box-shadow: 0 0 0 2px var(--paper), 0 0 0 6px rgba(217,68,47,.14); }
+  .vis .cp.flag::before, .vis .cp.fixed::before { opacity: 0; }
+  .vis .cp.flag::after { opacity: 1; transform: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 3.6v5.2' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='8' cy='11.9' r='1.15' fill='%23fff'/%3E%3C/svg%3E"); }
+  .vis .cp.fixed { background-color: var(--solid); box-shadow: 0 0 0 2px var(--paper); }
+  .vis .cp.fixed::after { opacity: 1; transform: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.4 8.3l2.4 2.4 4.9-5.2' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  /* the fine rule: readiness from 0 to 5, a long tick per point, short ticks per tenth */
+  .vis .rule { position: relative; height: 22px; margin: 8px 0 14px; }    /* same span as the track, so the paint ends on the readiness score */
+  .vis .rule::before { content: ""; position: absolute; inset: 0 0 auto; height: 8px; border-top: 1px solid rgba(var(--ink-rgb),.12);
+    background: repeating-linear-gradient(90deg, rgba(var(--ink-rgb),.28) 0 1px, transparent 1px 20%) 0 0 / calc(100% + 1px) 8px no-repeat,
+                repeating-linear-gradient(90deg, rgba(var(--ink-rgb),.12) 0 1px, transparent 1px 2%) 0 0 / calc(100% + 1px) 4px no-repeat; }
+  .vis .rule span { position: absolute; top: 10px; font-size: 10px; letter-spacing: .5px; color: rgba(var(--ink-rgb),.38); transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) {
+    .vis .track { height: 32px; margin-top: 14px; }
+    .vis .lane, .vis .lane .today { border-radius: 16px; }
+    .vis .cp { width: 22px; height: 22px; }
+    .vis .cp::after { background-size: 14px 14px; }
+    .vis .labels .col-label { padding-bottom: 8px; }
+    .vis .labels .col-label::after { bottom: -14px; height: 18px; }
+    .vis .rule { margin: 6px 0 10px; }
+  }
+
+  /* ---------- capability page folds: every group is the nav's construction, one rounded container of white cells split by hairlines ---------- */
+  .group { border-radius: 24px; overflow: hidden; background: rgba(var(--ink-rgb),.08); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06); display: grid; gap: 1px; }
+  .group > * { background: var(--paper); }
+  .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; margin-bottom: 48px; }
+  .sec-head .eyebrow { margin-bottom: 18px; }
+  .sec-head p { margin: 0; max-width: 420px; font-size: 17px; line-height: 1.5; color: var(--muted); }
+
+  /* the scene copy for what we hear: three quotes, smaller than a headline */
+  .copy-a .quotes { font-size: clamp(26px, 3.5vh, 34px); line-height: 1.28; letter-spacing: -.4px; }
+  .copy-a .w { color: var(--ghost); }
+  .copy-a .w.on { color: var(--ink); }
+  .copy-a .w.hit { color: var(--hit); }
+
+  /* the shift: today against with devx, row by row */
+  .shift { grid-template-columns: 220px 1fr 1fr; }
+  .shift > div { padding: 22px 28px; font-size: 16px; line-height: 1.5; color: var(--muted); }
+  .shift .h { padding: 16px 28px; font-size: 13px; font-weight: 500; color: rgba(var(--ink-rgb),.5); background: var(--t2); }
+  .shift .h.devx { color: var(--ink); }
+  .shift .k { font-size: 16px; font-weight: 500; color: var(--ink); }
+  .shift .was { position: relative; padding-left: 52px; }
+  .shift .was::before { content: ""; position: absolute; left: 28px; top: 30px; width: 8px; height: 8px; border-radius: 2px; background: #d9442f; opacity: .85; }
+  .shift .now { position: relative; padding-left: 52px; color: var(--ink); }
+  .shift .now::before { content: ""; position: absolute; left: 26px; top: 28px; width: 12px; height: 12px; border-radius: 3px; background: var(--px-img) 30% 45% / 900% auto; }
+
+  /* what we build: six cells, a plain promise above the technical detail */
+  .build { grid-template-columns: repeat(3, 1fr); }
+  .build article { display: flex; flex-direction: column; padding: 32px 32px 30px; transition: background .25s ease; }
+  .build article:hover { background: var(--t1); }
+  .build .nm { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; font-size: 14px; font-weight: 500; color: rgba(var(--ink-rgb),.55); }
+  .build .nm i { width: 8px; height: 8px; border-radius: 2px; background: var(--grey-c); transition: background .3s ease; }
+  .build article:hover .nm i { background: var(--px-img) 30% 45% / 900% auto; }
+  .build h3 { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 500; letter-spacing: -.3px; color: var(--ink); }
+  .build .d { margin: 10px 0 20px; font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+  .build ul { margin: auto 0 0; padding: 0; list-style: none; border-top: 1px solid rgba(var(--ink-rgb),.07); }
+  .build li { padding: 10px 0 10px 18px; position: relative; font-size: 14px; line-height: 1.45; color: rgba(var(--ink-rgb),.75); border-bottom: 1px solid rgba(var(--ink-rgb),.07); }
+  .build li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .build li::before { content: ""; position: absolute; left: 2px; top: 18px; width: 6px; height: 1px; background: rgba(var(--ink-rgb),.4); }
+
+  /* use cases: a scannable table, one row per problem */
+  .uses { grid-template-columns: 1.15fr 1fr 1.35fr 1.15fr; }
+  .uses > div { padding: 18px 24px; font-size: 15px; line-height: 1.45; color: var(--muted); transition: background .2s ease; }
+  .uses .h { padding: 14px 24px; font-size: 13px; font-weight: 500; color: rgba(var(--ink-rgb),.5); background: var(--t2); }
+  .uses .k { font-weight: 500; color: var(--ink); }
+  .uses .o { color: var(--ink); }
+  .uses > div.hot { background: var(--t1); }
+
+  /* outcomes we sign up for */
+  .outs { grid-template-columns: repeat(var(--n, 4), 1fr); }
+  .outs article { padding: 28px 28px 26px; display: flex; flex-direction: column; }
+  .outs .n { font-size: 13px; color: rgba(var(--ink-rgb),.4); font-variant-numeric: tabular-nums; }
+  .outs h3 { margin: 14px 0 10px; font-size: 22px; line-height: 1.2; font-weight: 500; letter-spacing: -.3px; }
+  .outs p { margin: 0 0 22px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+  .outs .src { margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(var(--ink-rgb),.07); font-size: 13px; color: rgba(var(--ink-rgb),.55); }
+  .outs .src b { display: block; font-weight: 500; color: var(--ink); }
+  .out-note { display: flex; align-items: center; gap: 14px; margin-top: 20px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+
+  /* how we work: a week ruler, phases drawn to scale, then one cell per phase with its deliverable */
+  .weeks { position: relative; height: 56px; margin-bottom: 14px; }
+  .weeks .seg { position: absolute; top: 18px; height: 18px; border-radius: 6px; background: var(--grey-b); box-shadow: inset 0 0 0 1px rgba(var(--ink-rgb),.06); transition: background .3s ease; }
+  .weeks .seg.on { background: var(--px-img) 30% 45% / 400% auto; box-shadow: none; }
+  .weeks .tick { position: absolute; top: 42px; transform: translateX(-50%); font-size: 11px; color: rgba(var(--ink-rgb),.4); font-variant-numeric: tabular-nums; }
+  .weeks .base { position: absolute; left: 0; right: 0; top: 40px; height: 1px; background: rgba(var(--ink-rgb),.12); }
+  .phases { grid-template-columns: repeat(4, 1fr); }
+  .phases article { padding: 26px 26px 24px; display: flex; flex-direction: column; cursor: default; transition: background .25s ease; }
+  .phases article:hover, .phases article.on { background: var(--t1); }
+  .phases .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .phases h3 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.2px; }
+  .phases .when { font-size: 13px; color: rgba(var(--ink-rgb),.5); white-space: nowrap; }
+  .phases p { margin: 0 0 22px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+  .phases .get { margin-top: auto; padding: 14px 16px; border-radius: 10px; background: var(--t3); font-size: 14px; line-height: 1.45; color: var(--ink); }
+  .phases .get span { display: block; margin-bottom: 4px; font-size: 12px; color: rgba(var(--ink-rgb),.5); }
+
+  /* where it fits: the practice stack with this layer lit, and the named hand-offs */
+  .fit { grid-template-columns: 1fr 1.2fr; }
+  .fit .draw { display: grid; place-items: center; padding: 40px; background: var(--paper) var(--dots-img) center / 751px auto; }
+  .fit .draw svg { width: 100%; max-width: 520px; height: auto; overflow: visible; }
+  .fit .draw .lbl { font-family: var(--sans); font-size: 7px; fill: rgba(var(--ink-rgb),.45); }
+  .fit .draw .lbl.me { fill: var(--ink); font-weight: 600; }
+  .fit .hand { display: flex; flex-direction: column; }
+  .fit .row { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 22px 32px; border-bottom: 1px solid rgba(var(--ink-rgb),.07); font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+  .fit .row b { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .fit .tech { padding: 22px 32px 28px; margin-top: auto; }
+  .fit .tech b { display: block; margin-bottom: 12px; font-size: 14px; font-weight: 500; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { padding: 6px 11px; border-radius: 10px; background: var(--t3); font-size: 13px; color: var(--ink); }
+  .stack-big .top { fill: var(--paper); stroke: var(--edge); stroke-width: .6; stroke-linejoin: round; }
+  .stack-big .side { fill: var(--side); stroke: var(--edge); stroke-width: .6; stroke-linejoin: round; }
+  .stack-big .side.dk { fill: var(--side-dk); }
+  .stack-big .me .top, .stack-big .me .side { fill: url(#fit-px); stroke: rgba(var(--ink-rgb),.25); }
+  .stack-big .shade { fill: rgba(var(--ink-rgb),.1); } .stack-big .shade.dk { fill: rgba(var(--ink-rgb),.22); }
+  .stack-big .guide line { stroke: var(--guide); stroke-width: .6; stroke-dasharray: 2 3; }
+  .stack-big .lead-l { stroke: rgba(var(--ink-rgb),.25); stroke-width: .5; }
+  .stack-big .px { fill: var(--pixel); }
+
+  .faq-wrap { max-width: 920px; }
+  .cap .end-cta h2 { max-width: 760px; font-size: 52px; }
+
+  /* the shift line on capability pages: equal columns that never grow; today above, with devx below once it lands */
+  .cap .vis .cols { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  /* ---------- v6 folds: v5's components at capability scale ---------- */
+  /* what we build: six cells in the bento */
+  .bento.six { grid-template-columns: repeat(5, 1fr); grid-template-areas: "a a a b b" "c c d d d" "e e e f f"; }
+  .bento.six .card:nth-child(5) { grid-area: e; } .bento.six .card:nth-child(6) { grid-area: f; }
+  .bento.six .card p { font-size: 16px; max-width: 480px; }
+  .bento.six .card .fig { max-width: 520px; }
+
+  /* use cases: a row of cards. Each industry has its own colour, drawn as the soft pixel blocks */
+  .ucc-nav { display: flex; align-items: center; gap: 10px; }
+  .ucc-count { margin-right: 10px; font-size: 14px; color: rgba(var(--ink-rgb),.45); font-variant-numeric: tabular-nums; }
+  .ucc-count b { font-weight: 500; color: var(--ink); }
+  .ucc-btn { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); color: var(--ink); font-size: 17px; box-shadow: 0 2px 4px -2px rgba(0,0,0,.2), 0 0 0 1px rgba(var(--ink-rgb),.08); transition: transform .15s ease, opacity .2s ease; }
+  .ucc-btn:hover:not(:disabled) { transform: translateY(-1px); }
+  .ucc-btn:disabled { opacity: .35; cursor: default; }
+  /* --edge: the distance from the viewport's edge to the section's text, so cards snap under the heading and still run to the page edge */
+  .ucc-track { --edge: calc((100vw - min(100vw, var(--frame) + 2px)) / 2 + 112px);
+    display: flex; gap: 16px; margin: 0 calc(-1 * var(--edge)); padding: 4px var(--edge) 28px; overflow-x: auto;
+    scroll-snap-type: x mandatory; scroll-padding-inline: var(--edge); scrollbar-width: none; outline: none; }
+  .ucc-track::-webkit-scrollbar { display: none; }
+  .ucc { flex: 0 0 360px; scroll-snap-align: start; display: flex; flex-direction: column; border-radius: 24px; padding: 6px; background: var(--t3); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06); transition: transform .4s cubic-bezier(.32,.72,0,1), box-shadow .3s ease; }
+  .ucc:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.08), 0 24px 40px -28px rgba(var(--shadow-rgb),.3); }
+  .ucc-top { position: relative; height: 196px; border-radius: 18px; overflow: hidden; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; padding: 16px; }
+  /* the soft pixel blocks, drawn only from the shared palette: white at the top, the industry's two hues settling in tall blocks at the base */
+  /* the devx gradient itself: each card top is a crop of the hero background (soft fields, crisp block edges, the grain),
+     a different region per industry, never recoloured */
+  .ucc-top::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper) var(--hero-img) var(--crop) / 300% auto no-repeat;
+    transition: transform 1.2s cubic-bezier(.32,.72,0,1); }
+  .ucc:nth-child(2n) .ucc-top::before { transform: scaleX(-1); }
+  .ucc:hover .ucc-top::before { transform: scale(1.04); }
+  .ucc:nth-child(2n):hover .ucc-top::before { transform: scaleX(-1) scale(1.04); }
+  .ucc-ind { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 8px; border-radius: 10px; background: rgba(var(--paper-rgb),.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-size: 13.5px; font-weight: 500; color: var(--ink); }
+  .ucc-ind i { font-size: 18px; }
+  .ucc-set { align-self: flex-start; max-width: 92%; padding: 6px 10px; border-radius: 9px; background: rgba(var(--paper-rgb),.7); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-size: 12.5px; line-height: 1.35; color: rgba(var(--ink-rgb),.75); }
+  .ucc-body { flex: 1; display: flex; flex-direction: column; margin-top: 6px; padding: 18px 18px 16px; border-radius: 18px; background: var(--paper); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.05); }
+  .ucc-n { font-size: 12px; color: rgba(var(--ink-rgb),.4); font-variant-numeric: tabular-nums; }
+  .ucc h3 { margin: 6px 0 8px; font-size: 21px; line-height: 1.25; font-weight: 500; letter-spacing: -.3px; color: var(--ink); }
+  .ucc p { margin: 0 0 18px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+  .ucc-m { margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px; }
+  .ucc-m span { padding: 5px 9px; border-radius: 8px; background: var(--t3); box-shadow: none; font-size: 12.5px; color: var(--ink); }
+
+  /* outcomes: the arc's readout carries the metrics, and the note sits under the arc */
+  .outcomes .arc-center > p { font-size: 17px; }
+  /* the commitment under the arc: built like the menu footers, a tile and two lines */
+  .outcomes .out-note { display: flex; align-items: center; gap: 16px; margin: 8px auto 0; max-width: 760px; padding: 14px 22px 14px 14px; border-radius: 18px;
+    background: var(--t3); box-shadow: inset 0 0 0 1px rgba(var(--ink-rgb),.06); font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+  .outcomes .out-note .tile { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--paper); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06); font-size: 22px; color: var(--ink); }
+  .outcomes .out-note b { display: block; margin-bottom: 2px; font-weight: 500; color: var(--ink); }
+
+  /* where it fits: hand-offs are buttons; pointing at one traces its layers */
+  .fit .row { all: unset; box-sizing: border-box; display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 22px 32px; border-bottom: 1px solid rgba(var(--ink-rgb),.07); font-size: 15.5px; line-height: 1.5; color: var(--muted); cursor: default; transition: background .2s ease; }
+  .fit .row b { font-size: 14px; font-weight: 500; color: var(--ink); }
+  .fit .row.on, .fit .row:focus-visible { background: var(--t2); }
+  .fit .row.on b::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 2px; background: var(--pixel); vertical-align: 1px; }
+  .stack-big .sl, .stack-big .lbl, .stack-big .lead-l { transition: opacity .3s ease, transform .4s cubic-bezier(.32,.72,0,1); }
+  .stack-big.tracing .sl:not(.lit):not(.me), .stack-big.tracing .lbl:not(.lit):not(.me), .stack-big.tracing .lead-l:not(.lit) { opacity: .35; }
+  .stack-big .sl.lit { transform: translateX(-4px); }
+  .stack-big .sl.lit .top { stroke: var(--solid); stroke-width: .9; }
+  .stack-big .lbl.lit { fill: var(--ink); font-weight: 600; }
+  .stack-big .lead-l.lit { stroke: var(--solid); }
+
+  /* where it fits, wide, built like the nav panel: an off-white shell, one white box of cells, and a footer row for the systems of record */
+  .fit2 { position: relative; padding: 6px; border-radius: 24px; background: var(--t3); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.06), 0 24px 40px -28px rgba(var(--shadow-rgb),.25); }
+  .fit-white { display: grid; gap: 1px; border-radius: 18px; overflow: hidden; background: rgba(var(--ink-rgb),.08); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.05); }
+  .fit-white > * { background: var(--paper); }
+  .fit-band { all: unset; box-sizing: border-box; position: relative; display: flex; align-items: baseline; gap: 14px; padding: 16px 24px 16px 28px; background: var(--paper); cursor: default; transition: background .2s ease; }
+  .fit-band b { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .fit-band span { font-size: 14px; color: var(--muted); }
+  .fit-band em, .fit-tile em { margin-left: auto; font-style: normal; font-size: 12px; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; }
+  .fit-band em::before, .fit-tile em::before { content: ""; width: 6px; height: 6px; border-radius: 2px; background: var(--pixel); }
+  .fit-band.assure::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--px-img) 30% 45% / 900% auto; }
+  .fit-band.assure.me { background: var(--paper) var(--hero-img) center 70% / cover; }
+  .fit-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(var(--ink-rgb),.08) !important; }
+  .fit-tile { all: unset; box-sizing: border-box; position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 16px 22px 22px; background: var(--paper); cursor: default; transition: background .2s ease; }
+  .fit-tile:not(:last-child)::after { content: "→"; position: absolute; right: -6px; top: 74px; z-index: 1; width: 12px; height: 16px; text-align: center; font-size: 11px; line-height: 16px; background: var(--paper); color: rgba(var(--ink-rgb),.35); }
+  .fit-tile .tile-art { width: 100%; height: 120px; margin-bottom: 8px; overflow: visible; }
+  .fit-tile .role { font-size: 12.5px; color: rgba(var(--ink-rgb),.5); }
+  .fit-tile b { margin-top: 2px; font-size: 16px; font-weight: 500; line-height: 1.3; color: var(--ink); }
+  .fit-tile em { margin: 10px 0 0; }
+  .fit-tile.on, .fit-band.on { background: var(--t2); }
+  .tile-art .top { fill: var(--paper); stroke: var(--edge); stroke-width: .8; stroke-linejoin: round; }
+  .tile-art .side { fill: var(--side); stroke: var(--edge); stroke-width: .8; stroke-linejoin: round; } .tile-art .side.dk { fill: var(--side-dk); }
+  .tile-art .grid { fill: none; stroke: var(--l1); stroke-width: .6; stroke-dasharray: 2 2; }
+  .tile-art.me .top, .tile-art.me .side { fill: url(#menu-px); stroke: rgba(var(--ink-rgb),.25); }
+  .tile-art.me .shade { fill: rgba(var(--ink-rgb),.1); } .tile-art.me .shade.dk { fill: rgba(var(--ink-rgb),.22); }
+  .tile-art.me .px { fill: var(--pixel); }
+  .tile-art .top, .tile-art .side, .tile-art .shade, .tile-art .px { transition: transform .45s cubic-bezier(.32,.72,0,1); }
+  .fit-tile:hover .tile-art .top, .fit-tile:hover .tile-art .side, .fit-tile:hover .tile-art .shade, .fit-tile:hover .tile-art .px { transform: translateY(-6px); }
+  .fit-detail { position: relative; padding: 0; }
+  .fit-detail .notch { position: absolute; top: -7px; z-index: 1; width: 12px; height: 12px; margin-left: -6px; background: var(--paper); transform: rotate(45deg); box-shadow: -1px -1px 0 rgba(var(--ink-rgb),.08); transition: left .4s cubic-bezier(.32,.72,0,1); }
+  .fd-in { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); transition: opacity .18s ease, transform .25s ease; }
+  .fd-in.out { opacity: 0; transform: translateY(4px); }
+  .fd { padding: 22px 28px 24px; }
+  .fd + .fd { border-left: 1px solid rgba(var(--ink-rgb),.07); }
+  .fd span { font-size: 12.5px; font-weight: 500; color: rgba(var(--ink-rgb),.5); }
+  .fd p { margin: 6px 0 0; font-size: 17px; line-height: 1.45; color: var(--ink); }
+  /* the systems of record: the footer row under the white box, the same as the nav panel's */
+  .fit-foot { all: unset; box-sizing: border-box; width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 12px 10px; cursor: default; }
+  .fit-foot .tile { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); box-shadow: 0 0 0 1px rgba(var(--ink-rgb),.08); font-size: 18px; color: var(--ink); }
+  .fit-foot .tile i { display: inline-block; line-height: 1; }
+  .fit-foot .ff { font-size: 14px; line-height: 1.45; color: var(--muted); }
+  .fit-foot .ff b { display: block; font-size: 15px; font-weight: 500; color: var(--ink); }
+  .fit-foot:hover .tile i::before, .fit-foot:hover .tile i::after, .fit-foot.on .tile i::before, .fit-foot.on .tile i::after {
+    background: linear-gradient(135deg, #6a9afa 0%, #86adf1 27%, #f59f81 59%, #f69fc2 79%, #fbbfd7 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .logos { margin-top: 56px; text-align: center; }
+  .logos-k { display: block; margin-bottom: 22px; font-size: 13px; color: rgba(var(--ink-rgb),.5); }
+  .logos-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 34px; }
+  .lg { display: inline-flex; align-items: center; gap: 9px; color: rgba(var(--ink-rgb),.6); filter: grayscale(1); opacity: .75; transition: opacity .2s ease, filter .2s ease; }
+  .lg img { width: 22px; height: 22px; }
+  .lg b { font-size: 15px; font-weight: 600; letter-spacing: -.2px; }
+  .lg:hover { opacity: 1; filter: none; color: var(--ink); }
+  .lg.wm b { font-weight: 600; }
+
+  /* the bento draws the practice figures at 1:1 (v5 zoomed its four, which the new ones do not need) */
+  .bento.six .card .fig > [data-hairline] { scale: 1; transform-origin: 50% 50%; }
+  .bento.six .card .fig[data-fig="block"] > [data-hairline] { scale: 1.12; transform-origin: 50% 64%; }
+  .bento.six .card .fig[data-fig="river"] > [data-hairline] { scale: 1.3; }
+
+  /* clients, running under the hero's actions, just above the card's blurred edge */
+  .hero-logos { margin: 40px auto 0; max-width: 1040px; }
+  .marquee { display: flex; overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .mq { flex: none; display: flex; align-items: center; gap: 56px; padding-right: 56px; animation: mq 50s linear infinite; }
+  .marquee:hover .mq { animation-play-state: paused; }
+  @keyframes mq { to { transform: translateX(-100%); } }
+  .cl { height: 30px; width: auto; opacity: .5; filter: grayscale(1) brightness(.2); transition: opacity .2s ease; }
+  .cl:hover { opacity: .85; }
+  @media (prefers-reduced-motion: reduce) { .mq { animation: none; } }
+
+  /* what we build: one devx gradient laid across the whole bento; each cell is a window onto it, seen only while hovered */
+  .bento.six .card { overflow: hidden; isolation: isolate; }
+  .bento.six .card > * { position: relative; z-index: 1; }
+  .bento.six .card::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+    background: var(--hero-img) no-repeat;
+    background-size: calc(var(--bw, 100%) + 48px) calc(var(--bh, 100%) + 48px);
+    background-position: calc(var(--tx, 0px) - var(--ox, 0px)) calc(var(--ty, 0px) - var(--oy, 0px));
+    transition: opacity .5s ease, background-position .8s cubic-bezier(.32,.72,0,1); }
+  .bento.six .card:hover::before { opacity: .22; }
+
+  /* nav: the assurance card, every layer banded */
+  .stack.all .as { transition-delay: var(--d); }
+  .stack.all .side { fill: url(#menu-px); stroke: rgba(var(--ink-rgb),.25); }
+  .stack.all .top { stroke: rgba(var(--ink-rgb),.25); }
+  .stack.all .tint { fill: url(#menu-px); opacity: .32; pointer-events: none; transition: opacity .4s ease var(--d); }
+  .menu-card:hover .stack.all .tint, .menu-card:focus-visible .stack.all .tint { opacity: .6; }
+  .menu-card:hover .stack.all .as, .menu-card:focus-visible .stack.all .as { transform: translateY(-4px); }
+  .menu-card:hover .stack.all .px, .menu-card:focus-visible .stack.all .px { transition-delay: calc(var(--d) + .15s); }
+
+  /* the orange square only marks "you are here" now */
+  .fit .row.on b::before, .fit-band em::before, .fit-tile em::before { content: none; }
+
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ink: #f3f2ee; --ink-warm: #f3efe4; --muted: #aeaba4; --faint: rgba(243, 242, 238, .55); --ghost: #75736d;
+    --bg: #1a1a19; --band: #161615; --line: #32322f; --line-strong: rgba(255, 255, 255, .16);
+    --paper: #222221; --paper-rgb: 34, 34, 33; --ink-rgb: 243, 242, 238; --tint-rgb: 58, 58, 55;
+    --solid: #f3f2ee; --on-solid: #121721;
+    --t1: #282826; --t2: #2a2a28; --t3: #1d1d1c; --t4: #2e2e2c; --t5: #2e2e2c;
+    --side: #2e2e2b; --side-dk: #383835; --edge: #605f5b; --guide: #4a4946;
+    --l1: #3a3a37; --l2: #3a3a37; --l3: #31312f; --l4: #444441;
+    --hl-e: #8a8984; --hl-m: #63625e; --lane: #2a2a28; --lane-on: #4c4b48; --lane-flag: #6a3128; --arc: #252523;
+    --grey-a: #4f4e4a; --grey-b: #2e2e2c; --grey-c: #4f4e4a; --hit: #f2543d; --shadow-rgb: 0, 0, 0;
+    --dots-img: url("assets/dot-grid-dark.svg");
+    --hero-img: url("assets/hero-bg-dark.svg");
+  }
+  :root[data-theme="dark"] body:not(.scrolled) .nav .logo { filter: none; }
+  :root[data-theme="dark"] body.scrolled .nav > .btn { color: #0d202c; }
+  :root[data-theme="dark"] .vis .cp.fixed::after { filter: invert(1); }
+  .arc .cp.now path { stroke: var(--on-solid); }
+  :root[data-theme="dark"] .scene-grid { filter: brightness(.55); }
+  /* use-case artwork stays the light gradient: a coloured panel, like the scorecard strip and the arc */
+  :root[data-theme="dark"] .ucc-top::before { background-image: url("assets/hero-bg.svg"); background-color: #fff; }
+  /* dark gradients band in 8-bit colour; a screen-resolution grain dithers the steps away */
+  :root[data-theme="dark"] body::after { content: ""; position: fixed; inset: 0; z-index: 2147483000; pointer-events: none;
+    background: url("assets/grain.png") 0 0 / 128px 128px; mix-blend-mode: overlay; opacity: .22; }
+  :root[data-theme="dark"] .ucc-logo img, :root[data-theme="dark"] .hero-logos img, :root[data-theme="dark"] .logos img { filter: grayscale(1) invert(1); }
+  html { transition: background-color .3s ease; }
+  body, .card, .fit2, .ucc, .ucc-body, .case, .rail { transition: background-color .3s ease, color .3s ease, border-color .3s ease; }
+
+  .nav > ul { margin-inline: auto; }
+  /* the switch: two icons in a small track on the nav pill */
+  .theme-sw { all: unset; cursor: pointer; position: relative; display: inline-grid; grid-auto-flow: column; align-items: center; gap: 2px; padding: 3px; margin-right: 12px; border-radius: 12px;
+    background: rgba(var(--ink-rgb), .06); color: rgba(var(--ink-rgb), .55); font-size: 15px; transition: background .3s ease; }
+  .theme-sw i { position: relative; z-index: 1; display: grid; place-items: center; width: 28px; height: 26px; border-radius: 9px; transition: color .3s ease; }
+  .theme-sw::before { content: ""; position: absolute; top: 3px; left: 3px; width: 28px; height: 26px; border-radius: 9px; background: var(--paper);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .12), 0 0 0 1px rgba(var(--ink-rgb), .06); transition: transform .35s cubic-bezier(.32,.72,0,1); }
+  :root[data-theme="dark"] .theme-sw::before { transform: translateX(30px); }
+  .theme-sw i.ph-sun, :root[data-theme="dark"] .theme-sw i.ph-moon { color: rgba(var(--ink-rgb), .95); }
+  :root[data-theme="dark"] .theme-sw i.ph-sun { color: rgba(var(--ink-rgb), .45); }
+  .theme-sw:focus-visible { outline: 2px solid #6a9afa; outline-offset: 2px; }
+  body.scrolled .theme-sw { background: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .5); }
+  body.scrolled .theme-sw::before { background: rgba(255, 255, 255, .16); box-shadow: none; }
+  body.scrolled .theme-sw i.ph-sun, :root[data-theme="dark"] body.scrolled .theme-sw i.ph-moon { color: #fff; }
+  :root[data-theme="dark"] body.scrolled .theme-sw i.ph-sun { color: rgba(255, 255, 255, .5); }
+</style>
+</head>
+<body class="cap">
+
+<div class="nav-wrap">
+  <nav class="nav" aria-label="Primary">
+    <a href="#top" class="logo" aria-label="devx labs home"></a>
+    <ul>
+      <li><button class="nav-trigger current" aria-expanded="false" aria-controls="menu-cap" data-menu="cap">Capabilities <i class="ph-bold ph-caret-down" aria-hidden="true"></i></button></li>
+      <li><button class="nav-trigger" aria-expanded="false" aria-controls="menu-ind" data-menu="ind">Industries <i class="ph-bold ph-caret-down" aria-hidden="true"></i></button></li>
+      <li><button class="nav-trigger" aria-expanded="false" aria-controls="menu-cp" data-menu="cp">Clients &amp; Partners <i class="ph-bold ph-caret-down" aria-hidden="true"></i></button></li>
+      <li><button class="nav-trigger" aria-expanded="false" aria-controls="menu-co" data-menu="co">Company <i class="ph-bold ph-caret-down" aria-hidden="true"></i></button></li>
+    </ul>
+    <button class="theme-sw" type="button" aria-label="Dark mode" aria-pressed="false"><i class="ph-bold ph-sun" aria-hidden="true"></i><i class="ph-bold ph-moon" aria-hidden="true"></i></button><a href="#contact" class="btn btn-light">Find your first three agents</a>
+    <div class="menu" id="menu">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><pattern id="menu-px" width="1" height="1" viewBox="40 340 1300 240" preserveAspectRatio="xMidYMid slice"><image href="assets/pixel-blocks.jpg" width="1820" height="1020"/></pattern></defs></svg>
+      <div class="menu-shell"></div>
+      <div class="menu-panel" id="menu-cap"><div class="menu-grid cap-grid"><a class="menu-card" href="platform-engineering.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl me"><polygon class="side" points="30,88 70,98 70,102 30,92" fill="url(#menu-px)"/><polygon class="side" points="70,98 110,88 110,92 70,102" fill="url(#menu-px)"/><polygon class="shade" points="30,88 70,98 70,102 30,92"/><polygon class="shade dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88" fill="url(#menu-px)"/><rect class="px" x="98" y="86" width="4" height="4"/></g><g class="sl"><polygon class="side" points="30,64 70,74 70,78 30,68"/><polygon class="side dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/></g><g class="sl"><polygon class="side" points="30,40 70,50 70,54 30,44"/><polygon class="side dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/></g><g class="sl"><polygon class="side" points="30,16 70,26 70,30 30,20"/><polygon class="side dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/></g></svg><b>Platform Engineering</b><span>Will our AI run in production, at a cost we can defend?</span></a><a class="menu-card" href="data-decision-intelligence.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl"><polygon class="side" points="30,88 70,98 70,102 30,92"/><polygon class="side dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/></g><g class="sl me"><polygon class="side" points="30,64 70,74 70,78 30,68" fill="url(#menu-px)"/><polygon class="side" points="70,74 110,64 110,68 70,78" fill="url(#menu-px)"/><polygon class="shade" points="30,64 70,74 70,78 30,68"/><polygon class="shade dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64" fill="url(#menu-px)"/><rect class="px" x="98" y="62" width="4" height="4"/></g><g class="sl"><polygon class="side" points="30,40 70,50 70,54 30,44"/><polygon class="side dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/></g><g class="sl"><polygon class="side" points="30,16 70,26 70,30 30,20"/><polygon class="side dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/></g></svg><b>Data &amp; Decision Intelligence</b><span>Does our AI understand how our business works?</span></a><a class="menu-card" href="agents-enterprise-autonomy.html" aria-current="page"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl"><polygon class="side" points="30,88 70,98 70,102 30,92"/><polygon class="side dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/></g><g class="sl"><polygon class="side" points="30,64 70,74 70,78 30,68"/><polygon class="side dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/></g><g class="sl me"><polygon class="side" points="30,40 70,50 70,54 30,44" fill="url(#menu-px)"/><polygon class="side" points="70,50 110,40 110,44 70,54" fill="url(#menu-px)"/><polygon class="shade" points="30,40 70,50 70,54 30,44"/><polygon class="shade dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40" fill="url(#menu-px)"/><rect class="px" x="98" y="38" width="4" height="4"/></g><g class="sl"><polygon class="side" points="30,16 70,26 70,30 30,20"/><polygon class="side dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/></g></svg><b>Agents &amp; Enterprise Autonomy</b><span>Can AI complete real work, safely, inside our systems?</span><em class="here">You are here</em></a><a class="menu-card" href="ai-native-experiences.html"><svg class="stack" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl"><polygon class="side" points="30,88 70,98 70,102 30,92"/><polygon class="side dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/></g><g class="sl"><polygon class="side" points="30,64 70,74 70,78 30,68"/><polygon class="side dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/></g><g class="sl"><polygon class="side" points="30,40 70,50 70,54 30,44"/><polygon class="side dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/></g><g class="sl me"><polygon class="side" points="30,16 70,26 70,30 30,20" fill="url(#menu-px)"/><polygon class="side" points="70,26 110,16 110,20 70,30" fill="url(#menu-px)"/><polygon class="shade" points="30,16 70,26 70,30 30,20"/><polygon class="shade dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16" fill="url(#menu-px)"/><rect class="px" x="98" y="14" width="4" height="4"/></g></svg><b>AI-Native Experiences</b><span>Will customers and staff use our AI, and trust it?</span></a><a class="menu-card wide" href="ai-assurance-governance.html"><svg class="stack all" viewBox="0 0 140 104" aria-hidden="true"><g class="guide"><line x1="30" y1="16" x2="30" y2="88"/><line x1="110" y1="16" x2="110" y2="88"/><line x1="70" y1="26" x2="70" y2="98"/></g><g class="sl as" style="--d:0ms"><polygon class="side" points="30,88 70,98 70,102 30,92" fill="url(#menu-px)"/><polygon class="side" points="70,98 110,88 110,92 70,102" fill="url(#menu-px)"/><polygon class="shade" points="30,88 70,98 70,102 30,92"/><polygon class="shade dk" points="70,98 110,88 110,92 70,102"/><polygon class="top" points="70,78 110,88 70,98 30,88"/><polygon class="tint" points="70,78 110,88 70,98 30,88"/><rect class="px" x="98" y="86" width="4" height="4"/></g><g class="sl as" style="--d:60ms"><polygon class="side" points="30,64 70,74 70,78 30,68" fill="url(#menu-px)"/><polygon class="side" points="70,74 110,64 110,68 70,78" fill="url(#menu-px)"/><polygon class="shade" points="30,64 70,74 70,78 30,68"/><polygon class="shade dk" points="70,74 110,64 110,68 70,78"/><polygon class="top" points="70,54 110,64 70,74 30,64"/><polygon class="tint" points="70,54 110,64 70,74 30,64"/><rect class="px" x="98" y="62" width="4" height="4"/></g><g class="sl as" style="--d:120ms"><polygon class="side" points="30,40 70,50 70,54 30,44" fill="url(#menu-px)"/><polygon class="side" points="70,50 110,40 110,44 70,54" fill="url(#menu-px)"/><polygon class="shade" points="30,40 70,50 70,54 30,44"/><polygon class="shade dk" points="70,50 110,40 110,44 70,54"/><polygon class="top" points="70,30 110,40 70,50 30,40"/><polygon class="tint" points="70,30 110,40 70,50 30,40"/><rect class="px" x="98" y="38" width="4" height="4"/></g><g class="sl as" style="--d:180ms"><polygon class="side" points="30,16 70,26 70,30 30,20" fill="url(#menu-px)"/><polygon class="side" points="70,26 110,16 110,20 70,30" fill="url(#menu-px)"/><polygon class="shade" points="30,16 70,26 70,30 30,20"/><polygon class="shade dk" points="70,26 110,16 110,20 70,30"/><polygon class="top" points="70,6 110,16 70,26 30,16"/><polygon class="tint" points="70,6 110,16 70,26 30,16"/><rect class="px" x="98" y="14" width="4" height="4"/></g></svg><span class="wide-copy"><b>AI Assurance &amp; Governance</b>Can our AI be trusted, and can we prove it? Spans every layer.</span></a></div><div class="menu-foot"><span class="tile"><i class="ph-duotone ph-stack" aria-hidden="true"></i></span><div><b>Not sure which layer is failing?</b>A Platform Review maps where you are on all five.</div><a class="btn" href="#contact">Book a review</a></div></div>
+      <div class="menu-panel" id="menu-ind"><div class="menu-grid ind-grid"><div class="ind-list" id="ind-list"></div><div class="ind-subs" id="ind-subs"></div></div><div class="menu-foot"><span class="tile"><i class="ph-duotone ph-compass" aria-hidden="true"></i></span><div><b>Don’t see your industry?</b>Every engagement starts from your systems, not a template.</div><a class="btn" href="#contact">Talk to us</a></div></div>
+      <div class="menu-panel" id="menu-cp"><div class="menu-grid cp-grid"><div class="cp-col" id="menu-partners"><div class="head">Partners</div></div><div class="cp-col"><div class="head">Featured</div><a class="feat" href="#"><span class="plate"><em>NEW</em><b>aws</b></span><b>devx × AWS: AI-native stack on AWS</b><span>Advanced Consulting Partner · joint reference architecture</span></a><div class="head">Client stories</div><a class="mstory" href="#proof-h"><span class="mk serif">LI</span><span><b>Larkspur Insurance</b><span>Second use case live</span></span><span class="m serif">6 weeks</span></a><a class="mstory" href="#proof-h"><span class="mk serif">CB</span><span><b>Corvane Bank</b><span>Cost per completed task</span></span><span class="m serif">−31%</span></a><a class="mstory" href="#proof-h"><span class="mk serif">HH</span><span><b>Halden Health</b><span>Accepted without edits</span></span><span class="m serif">82%</span></a></div></div><div class="menu-foot"><span class="tile"><i class="ph-duotone ph-quotes" aria-hidden="true"></i></span><div><b>All client stories</b>How teams took AI from pilot to production.</div><a class="btn" href="#proof-h">Read stories</a></div></div>
+      <div class="menu-panel" id="menu-co"><div class="menu-grid company-grid"><a class="menu-row" href="#"><span class="ic"><i class="ph-duotone ph-users-three" aria-hidden="true"></i></span><span>About us<small>Who we are and how we work</small></span></a><a class="menu-row" href="#"><span class="ic"><i class="ph-duotone ph-briefcase" aria-hidden="true"></i></span><span>Careers<small>Open roles</small></span></a><a class="menu-row" href="#"><span class="ic"><i class="ph-duotone ph-notebook" aria-hidden="true"></i></span><span>Blog<small>Notes from the field</small></span></a><a class="menu-row" href="#contact"><span class="ic"><i class="ph-duotone ph-chat-circle-text" aria-hidden="true"></i></span><span>Contact<small>Tell us what you are building</small></span></a></div></div>
+    </div>
+  </nav>
+</div>
+
+<section class="scene" id="top" aria-label="Agents &amp; Enterprise Autonomy">
+  <div class="scene-track" id="scene-track">
+    <div class="scene-sticky">
+      <div class="scene-bg" aria-hidden="true"></div>
+      <div class="scene-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <span class="eyebrow">Agents &amp; Enterprise Autonomy</span>
+        <h1 class="serif">Agents that finish the work,<br>not just suggest it.</h1>
+        <p class="lead">We build agents that plan, call your systems and complete workflow steps, low-code or high-code, with the approvals and audit trail your risk team signs.</p>
+        <div class="hero-actions"><a href="#contact" class="btn btn-dark">Find your first three agents</a><a href="#build" class="hero-more">See an agent run a real workflow <span aria-hidden="true">↓</span></a></div>
+        <div class="hero-logos" aria-label="Clients"><div class="marquee"><div class="mq"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/visa.svg" alt="Visa"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/mastercard.svg" alt="Mastercard"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/americanexpress.svg" alt="American Express"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/barclays.svg" alt="Barclays"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/hdfcbank.svg" alt="HDFC Bank"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/dhl.svg" alt="DHL"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/fedex.svg" alt="FedEx"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/lufthansa.svg" alt="Lufthansa"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/toyota.svg" alt="Toyota"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/samsung.svg" alt="Samsung"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/shell.svg" alt="Shell"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/tmobile.svg" alt="T-Mobile"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/walmart.svg" alt="Walmart"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/infosys.svg" alt="Infosys"></div><div class="mq" aria-hidden="true"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/visa.svg" alt="Visa"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/mastercard.svg" alt="Mastercard"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/americanexpress.svg" alt="American Express"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/barclays.svg" alt="Barclays"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/hdfcbank.svg" alt="HDFC Bank"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/dhl.svg" alt="DHL"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/fedex.svg" alt="FedEx"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/lufthansa.svg" alt="Lufthansa"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/toyota.svg" alt="Toyota"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/samsung.svg" alt="Samsung"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/shell.svg" alt="Shell"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/tmobile.svg" alt="T-Mobile"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/walmart.svg" alt="Walmart"><img class="cl" src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/infosys.svg" alt="Infosys"></div></div></div>
+      </div>
+      <div class="scene-copy copy-a">
+        <span class="eyebrow">The problem</span>
+        <p class="serif" data-words>The chatbot answers. Your people still re-key it into four systems. Every demo is magic until it meets your ERP.</p>
+      </div>
+      <div class="scene-copy copy-b">
+        <span class="eyebrow">With devx agents</span>
+        <p class="serif" data-words>You are right to be careful. Autonomy should be earned one step at a time.</p>
+        <a class="btn btn-dark scene-cta" href="#contact">Find your first three agents</a>
+      </div>
+      <div class="vis" aria-hidden="true">
+        <div class="cols labels"></div>
+        <div class="track">
+          <div class="lane"><i class="today"></i><i class="paint"></i></div>
+          <div class="cols cps"></div>
+        </div>
+        <div class="rule"><span style="left:0">0</span><span style="left:20%">1</span><span style="left:40%">2</span><span style="left:60%">3</span><span style="left:80%">4</span><span style="left:100%">5</span></div>
+        <div class="cols vals"></div>
+        <div class="kpi"><span class="kick">Platform readiness · <b>today</b></span><div class="num"><span>1.4</span><small>/ 5</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="rule" id="build"><section class="frame band section "><div class="section-head reveal"><span class="eyebrow">What we build</span><h2 class="h2 serif" id="build-h">Can AI complete real work, safely, inside our systems?</h2></div><div class="bento six reveal"><article class="card"><h3>Agent Opportunity and Workflow Design</h3><p>Which steps go to an agent, and which stay human. We break the work down before we build anything.</p><div class="fig" data-fig="ladder" data-label="Which steps go to an agent, and which stay human"></div></article><article class="card"><h3>Low-Code Agent Track</h3><p>Bounded work, shipped in weeks. For tasks with clear inputs, a few systems and business-owned rules.</p><div class="fig" data-fig="paths" data-opts="{&quot;paths&quot;: [&quot;Workspace&quot;, &quot;Salesforce&quot;, &quot;ServiceNow&quot;], &quot;start&quot;: &quot;Business-owned task&quot;}" data-label="Bounded work, shipped in weeks"></div></article><article class="card"><h3>High-Code Agent Engineering</h3><p>For processes with many systems, branches and exceptions. Engineered agents with the reliability of production software.</p><div class="fig" data-fig="flow" data-label="For processes with many systems, branches and exceptions"></div></article><article class="card"><h3>Tools, Integration and Permissions</h3><p>Agents act through your systems of record, safely. The part most demos skip.</p><div class="fig" data-fig="gateway" data-opts="{&quot;door&quot;: &quot;Tool registry&quot;, &quot;models&quot;: [&quot;SAP&quot;, &quot;Salesforce&quot;, &quot;ServiceNow&quot;, &quot;Core banking&quot;]}" data-label="Agents act through your systems of record, safely"></div></article><article class="card"><h3>Agent Operations</h3><p>Run agents like a team you manage. Visibility into what every agent did, what it cost and how well it did it.</p><div class="fig" data-fig="console" data-label="Run agents like a team you manage"></div></article><article class="card"><h3>Human and Agent Operating Model</h3><p>New work for people, designed with them. Technology changes the task. People decide whether it sticks.</p><div class="fig" data-fig="lens" data-opts="{&quot;labels&quot;: [&quot;People&quot;, &quot;Agents&quot;]}" data-label="New work for people, designed with them"></div></article></div></section></div>
+  <div class="rule" id="uses"><section class="frame band section "><div class="sec-head reveal"><div><span class="eyebrow">Use cases</span><h2 class="h2 serif">Find your own problem.</h2></div><div class="ucc-nav"><span class="ucc-count"><b>01</b> / 11</span><button type="button" class="ucc-btn" data-d="-1" aria-label="Previous use case">←</button><button type="button" class="ucc-btn" data-d="1" aria-label="Next use case">→</button></div></div><div class="ucc-track reveal" tabindex="0" aria-label="Use cases"><article class="ucc" style="--crop:100% 85%;--o:0"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-umbrella" aria-hidden="true"></i>Insurance</span><span class="ucc-set">Motor, property and health insurers</span></div><div class="ucc-body"><span class="ucc-n">01</span><h3>Claims intake and triage</h3><p>Reads first-notice documents, checks the policy, suggests a reserve and routes the claim</p><div class="ucc-m"><span>Claim cycle time</span><span>straight-through share</span></div></div></article><article class="ucc" style="--crop:100% 55%;--o:1"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-bank" aria-hidden="true"></i>Financial services</span><span class="ucc-set">Banks, NBFCs, fintechs</span></div><div class="ucc-body"><span class="ucc-n">02</span><h3>KYC and onboarding checks</h3><p>Extracts and verifies documents, screens names, assembles the case file</p><div class="ucc-m"><span>Onboarding time</span><span>analyst hours per case</span></div></div></article><article class="ucc" style="--crop:90% 70%;--o:2"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-bank" aria-hidden="true"></i>Financial services</span><span class="ucc-set">Finance shared services</span></div><div class="ucc-body"><span class="ucc-n">03</span><h3>Invoice exception handling</h3><p>Resolves three-way-match exceptions and follows up with vendors</p><div class="ucc-m"><span>Exceptions cleared per FTE</span><span>late-payment penalties</span></div></div></article><article class="ucc" style="--crop:100% 70%;--o:0"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-bank" aria-hidden="true"></i>Financial services</span><span class="ucc-set">Lenders and B2B businesses</span></div><div class="ucc-body"><span class="ucc-n">04</span><h3>Collections follow-up</h3><p>Personalised outreach, promise-to-pay capture and reminders</p><div class="ucc-m"><span>Cure rate</span><span>cost to collect</span></div></div></article><article class="ucc" style="--crop:30% 100%;--o:1"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>Any enterprise</span><span class="ucc-set">Enterprise IT</span></div><div class="ucc-body"><span class="ucc-n">05</span><h3>IT service desk resolution</h3><p>Diagnoses issues, resets access and provisions software with approval</p><div class="ucc-m"><span>Auto-resolution rate</span><span>mean time to resolve</span></div></div></article><article class="ucc" style="--crop:90% 85%;--o:2"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-umbrella" aria-hidden="true"></i>Insurance</span><span class="ucc-set">Commercial insurance, SME lending</span></div><div class="ucc-body"><span class="ucc-n">06</span><h3>Underwriting preparation</h3><p>Assembles the submission, flags missing information, drafts the summary</p><div class="ucc-m"><span>Quote turnaround</span><span>underwriter capacity</span></div></div></article><article class="ucc" style="--crop:0% 85%;--o:0"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>Any enterprise</span><span class="ucc-set">Sales and bid teams</span></div><div class="ucc-body"><span class="ucc-n">07</span><h3>RFP and tender response</h3><p>Drafts answers from past bids and routes sections to experts</p><div class="ucc-m"><span>Time to respond</span><span>bids submitted per quarter</span></div></div></article><article class="ucc" style="--crop:0% 100%;--o:1"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-factory" aria-hidden="true"></i>Manufacturing</span><span class="ucc-set">Manufacturing and distribution</span></div><div class="ucc-body"><span class="ucc-n">08</span><h3>Order-to-cash disputes</h3><p>Gathers evidence, proposes resolution, updates the ERP</p><div class="ucc-m"><span>Days sales outstanding</span><span>dispute cycle time</span></div></div></article><article class="ucc" style="--crop:60% 85%;--o:2"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>Any enterprise</span><span class="ucc-set">Compliance teams</span></div><div class="ucc-body"><span class="ucc-n">09</span><h3>Regulatory change tracking</h3><p>Reads new circulars, maps them to internal policies, drafts the impact note</p><div class="ucc-m"><span>Time to impact assessment</span></div></div></article><article class="ucc" style="--crop:90% 100%;--o:0"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-truck" aria-hidden="true"></i>Logistics</span><span class="ucc-set">Logistics and manufacturing</span></div><div class="ucc-body"><span class="ucc-n">10</span><h3>Supply chain exception management</h3><p>Detects delays, rebooks capacity and notifies customers</p><div class="ucc-m"><span>On-time in full</span><span>expedite cost</span></div></div></article><article class="ucc" style="--crop:15% 100%;--o:1"><div class="ucc-top"><span class="ucc-ind"><i class="ph ph-globe-hemisphere-west" aria-hidden="true"></i>Any enterprise</span><span class="ucc-set">IT and engineering</span></div><div class="ucc-body"><span class="ucc-n">11</span><h3>Legacy code modernisation</h3><p>Planner, refactoring and verification agents working across a repository</p><div class="ucc-m"><span>Modernisation throughput</span><span>defect rate</span></div></div></article></div></section></div>
+  <div class="rule" id="outcomes"><section class="frame section outcomes" aria-labelledby="out-h">
+    <div class="arc-track" id="arc-track"><div class="arc-sticky">
+      <div class="arc-head">
+        <span class="eyebrow">Outcomes we sign up for</span>
+        <h2 class="serif" id="out-h">Our fees move with these numbers</h2>
+      </div>
+      <div class="arc" id="arc">
+        <svg viewBox="0 0 1216 660" aria-hidden="true">
+          <defs>
+            <pattern id="arc-tex" patternUnits="userSpaceOnUse" x="58" y="40" width="1100" height="620">
+              <image href="assets/pixel-blocks.jpg" width="1100" height="620" preserveAspectRatio="xMidYMid slice"></image>
+            </pattern>
+            <mask id="arc-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1216" height="660">
+              <path id="arc-fillpath" fill="none" stroke="#fff" stroke-width="70" stroke-linecap="round"></path>
+            </mask>
+          </defs>
+          <path class="base" id="arc-base"></path>
+          <path class="rail-base" id="arc-railbase"></path>
+          <rect x="0" y="0" width="1216" height="660" fill="url(#arc-tex)" mask="url(#arc-mask)"></rect>
+          <path class="rail" id="arc-rail" mask="url(#arc-mask)"></path>
+          <g id="arc-cps"></g>
+        </svg>
+        <ul class="arc-labels" role="tablist" aria-label="Outcome measures" id="arc-labels"></ul>
+        <div class="arc-center" id="arc-center" role="tabpanel" aria-live="polite">
+          <h3 class="serif swap" id="arc-title"></h3>
+          <p class="swap" id="arc-desc"></p>
+          <div class="arc-stat swap"><span class="from serif" id="arc-from"></span><span class="arrow" aria-hidden="true"></span><span class="to serif" id="arc-to"></span></div>
+          <span class="arc-meta swap" id="arc-meta"></span>
+        </div>
+      </div>
+    </div></div>
+  <div class="out-note"><span class="tile"><i class="ph-duotone ph-user-circle-check" aria-hidden="true"></i></span><div><b>One owner for these numbers</b>Your devx Outcome Manager agrees the baseline with your process owner before the first agent goes live, and our fees move with these numbers.</div></div></section></div>
+  <div class="rule" id="how"><section class="frame section how" aria-labelledby="how-h">
+    <div class="how-head"><span class="eyebrow">How we work</span><h2 class="h2 serif" id="how-h">A deliverable at the end<br> of every phase</h2></div>
+    <div class="how-grid">
+      <div class="how-left"><div class="stepper"><div class="rail" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="step-list" role="tablist" aria-label="Engagement phases" aria-orientation="vertical"></div></div><div class="how-detail" aria-hidden="true"><h3></h3><p></p></div></div>
+      <div class="how-right"><figure class="how-item"><div class="step-frame"><div class="fig" data-fig="survey" data-opts="{&quot;callouts&quot;: [&quot;Tasks · 46&quot;, &quot;Systems · 9&quot;, &quot;Hand-offs · 13&quot;]}" data-label="Scan"></div></div></figure><figure class="how-item"><div class="step-frame"><div class="fig" data-fig="guardrails" data-opts="{&quot;labels&quot;: [&quot;Process owner&quot;, &quot;Risk&quot;], &quot;planes&quot;: [&quot;eval set&quot;, &quot;shadow mode&quot;, &quot;approvals&quot;, &quot;tools&quot;]}" data-label="Prove on real work"></div></div></figure><figure class="how-item"><div class="step-frame"><div class="fig" data-fig="shoots" data-opts="{&quot;live&quot;: [&quot;Claims agent&quot;, &quot;KYC agent&quot;]}" data-label="Go live with approvals"></div></div></figure><figure class="how-item"><div class="step-frame"><div class="fig" data-fig="orbit" data-opts="{&quot;reads&quot;: [&quot;Straight-through 64%&quot;, &quot;Cycle time −72%&quot;, &quot;Overrides 3%&quot;]}" data-label="Scale"></div></div></figure></div>
+    </div>
+  </section></div>
+  <div class="rule" id="fit"><section class="frame band section "><div class="sec-head reveal"><div><span class="eyebrow">Where it fits</span><h2 class="h2 serif">Where it fits in the stack</h2></div><p>Point at a layer to see what passes between it and this practice.</p></div><div class="fit2 reveal" data-detail="{&quot;3&quot;: [[&quot;Runs on&quot;, &quot;Platform Engineering (gateway, runtime, identity).&quot;]], &quot;2&quot;: [[&quot;Uses&quot;, &quot;Data &amp; Decision Intelligence (ontology tools, forecasts, knowledge).&quot;]], &quot;1&quot;: [[&quot;This practice&quot;, &quot;Can AI complete real work, safely, inside our systems?&quot;], [&quot;Owns&quot;, &quot;Agent Opportunity and Workflow Design, Low-Code Agent Track, High-Code Agent Engineering, Tools, Integration and Permissions, Agent Operations, Human and Agent Operating Model&quot;]], &quot;0&quot;: [[&quot;Shows up through&quot;, &quot;AI-Native Experiences (operator consoles, chat and voice).&quot;]], &quot;assure&quot;: [[&quot;Assurance hook&quot;, &quot;An eval suite for every agent, permission reviews for every tool, and an audit log for every action.&quot;]], &quot;base&quot;: [[&quot;Systems of record&quot;, &quot;ERP, POS, CRM and core banking stay the deterministic base every layer reads from and writes to.&quot;]]}" data-home="1"><div class="fit-white"><button type="button" class="fit-band assure" data-k="assure"><b>AI Assurance &amp; Governance</b><span>Spans every layer: evals, guardrails, migration, evidence</span></button><div class="fit-row"><button type="button" class="fit-tile" data-k="3"><svg class="tile-art" viewBox="0 0 140 80" aria-hidden="true"><polygon class="side" points="12,46 70,61 70,68 12,53"/><polygon class="side dk" points="70,61 128,46 128,53 70,68"/><polygon class="top" points="70,31 128,46 70,61 12,46"/><path class="grid" d="M41.0,38.5 L99.0,53.5 M99.0,38.5 L41.0,53.5"/></svg><span class="role">Where AI runs</span><b>Platform Engineering</b></button><button type="button" class="fit-tile" data-k="2"><svg class="tile-art" viewBox="0 0 140 80" aria-hidden="true"><polygon class="side" points="12,46 70,61 70,68 12,53"/><polygon class="side dk" points="70,61 128,46 128,53 70,68"/><polygon class="top" points="70,31 128,46 70,61 12,46"/><path class="grid" d="M41.0,38.5 L99.0,53.5 M99.0,38.5 L41.0,53.5"/></svg><span class="role">What AI knows</span><b>Data &amp; Decision Intelligence</b></button><button type="button" class="fit-tile me" data-k="1"><svg class="tile-art me" viewBox="0 0 140 80" aria-hidden="true"><polygon class="side" points="12,46 70,61 70,68 12,53"/><polygon class="side" points="70,61 128,46 128,53 70,68"/><polygon class="shade" points="12,46 70,61 70,68 12,53"/><polygon class="shade dk" points="70,61 128,46 128,53 70,68"/><polygon class="top" points="70,31 128,46 70,61 12,46"/><rect class="px" x="110" y="43" width="6" height="6"/></svg><span class="role">What AI does</span><b>Agents &amp; Enterprise Autonomy</b><em>You are here</em></button><button type="button" class="fit-tile" data-k="0"><svg class="tile-art" viewBox="0 0 140 80" aria-hidden="true"><polygon class="side" points="12,46 70,61 70,68 12,53"/><polygon class="side dk" points="70,61 128,46 128,53 70,68"/><polygon class="top" points="70,31 128,46 70,61 12,46"/><path class="grid" d="M41.0,38.5 L99.0,53.5 M99.0,38.5 L41.0,53.5"/></svg><span class="role">How people meet AI</span><b>AI-Native Experiences</b></button></div><div class="fit-detail" aria-live="polite"><i class="notch"></i><div class="fd-in"></div></div></div><button type="button" class="fit-foot" data-k="base"><span class="tile"><i class="ph-duotone ph-database" aria-hidden="true"></i></span><span class="ff"><b>Systems of record</b>ERP, POS, CRM and core banking: the base every layer reads from and writes to.</span></button></div><div class="logos reveal"><span class="logos-k">Technology we work with</span><div class="logos-row"><span class="lg" title="Gemini Enterprise"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/googlegemini.svg" alt="" loading="lazy"><b>Gemini Enterprise</b></span><span class="lg" title="Vertex AI Agent Engine"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/googlecloud.svg" alt="" loading="lazy"><b>Vertex AI Agent Engine</b></span><span class="lg wm" title="Google ADK"><b>Google ADK</b></span><span class="lg wm" title="Amazon Bedrock Agents"><b>Amazon Bedrock Agents</b></span><span class="lg" title="Claude Agent SDK"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/anthropic.svg" alt="" loading="lazy"><b>Claude Agent SDK</b></span><span class="lg" title="OpenAI Agents SDK"><img src="https://cdn.jsdelivr.net/npm/simple-icons@11.14.0/icons/openai.svg" alt="" loading="lazy"><b>OpenAI Agents SDK</b></span><span class="lg wm" title="LangGraph"><b>LangGraph</b></span><span class="lg wm" title="Model Context Protocol (MCP)"><b>Model Context Protocol</b></span><span class="lg wm" title="Agent2Agent (A2A)"><b>Agent2Agent</b></span></div></div></section></div>
+  <!-- Proof: client cases. Arrives as a card, then pins full screen while scrolling steps through the cases -->
+  <section class="proof" aria-labelledby="proof-h">
+    <div class="proof-track" id="proof-track"><div class="proof-sticky">
+      <div class="proof-band" id="proof-band"><div class="proof-inner">
+        <div class="proof-head">
+          <span class="eyebrow">In practice</span>
+          <h2 class="h2 serif" id="proof-h">From pilot to platform, in their words.</h2>
+        </div>
+        <div class="proof-viewport"><div class="proof-rail" id="proof-rail"></div></div>
+        <div class="proof-nav">
+          <button class="proof-arrow" id="proof-prev" aria-label="Previous case">←</button>
+          <div class="proof-dots" id="proof-dots" role="tablist" aria-label="Client cases"></div>
+          <button class="proof-arrow" id="proof-next" aria-label="Next case">→</button>
+        </div>
+      </div></div>
+    </div></div>
+  </section>
+
+  <div class="rule" id="faq"><section class="frame band section faq"><div class="reveal"><span class="eyebrow">Questions</span><h2 class="h2 serif" style="margin-top:20px">Questions buyers ask</h2></div><div class="reveal"><details open><summary>Will agents replace my team?</summary><p>The work changes first. We redesign roles with the people doing them, measure the capacity released and agree with you where it goes: more cases, harder cases or new work.</p></details><details><summary>What if an agent makes a mistake in our ERP?</summary><p>It can, which is why high-impact actions need approval, actions are reversible where possible, limits are set per tool, and every step is logged.</p></details><details><summary>Low-code or high-code?</summary><p>Low-code when the task is bounded and the business wants to own it. High-code when it crosses many systems or has expensive failure modes. Most clients run both on one platform.</p></details><details><summary>What happens when the underlying model changes?</summary><p>The Assurance practice runs every agent’s eval suite on the new model before any switch.</p></details></div></section></div>
+  <div class="end" id="contact">
+    <div class="end-bg" aria-hidden="true"><div class="end-fill"></div></div>
+      <section class="end-cta" aria-labelledby="cta-h">
+      <div>
+        <h2 class="serif" id="cta-h">Show us the process your best people hate doing.</h2>
+        <p>We will show you the agent that does it, running on your data, with your approvals in place.</p>
+        <a href="mailto:hello@devx.example" class="btn btn-dark">Find your first three agents</a>
+      </div>
+    </section>
+      <footer class="end-foot">
+      <div class="inner">
+        <div class="footer-top">
+          <div><span class="logo-ink" role="img" aria-label="devx labs"></span><p>Platform engineering for AI that has to work on Monday morning.</p></div>
+          <div><h4>Capabilities</h4><ul><li><a href="platform-engineering.html">Platform Engineering</a></li><li><a href="data-decision-intelligence.html">Data &amp; Decision Intelligence</a></li><li><a href="agents-enterprise-autonomy.html">Agents &amp; Enterprise Autonomy</a></li><li><a href="ai-native-experiences.html">AI-Native Experiences</a></li><li><a href="ai-assurance-governance.html">AI Assurance &amp; Governance</a></li></ul></div>
+          <div><h4>Industries</h4><ul><li><a href="#">Retail</a></li><li><a href="#">Healthcare</a></li><li><a href="#">Manufacturing</a></li><li><a href="#">Telco</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#how">How we work</a></li><li><a href="#">Partners</a></li><li><a href="#">Careers</a></li><li><a href="mailto:hello@devx.example">Contact</a></li></ul></div>
+          <div><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Security</a></li></ul></div>
+        </div>
+        <span class="wordmark" aria-hidden="true"></span>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script src="assets/hairline/kernel.js"></script>
+<script type="module">
+  import { mountFigure } from "./assets/hairline/devx-figs.js";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const map = (v, a, b) => clamp((v - a) / (b - a), 0, 1);
+  const SHIFT = [{"label": "The work", "was": "People re-key it", "now": "Agent completes it", "hit": "people still re-key it", "metric": "Tasks completed end to end", "from": "0%", "to": "64%"}, {"label": "Automation", "was": "Breaks on a new screen", "now": "API and MCP tools", "hit": "until it meets your ERP.", "metric": "Breaks per UI change", "from": "11", "to": "0"}, {"label": "Platform", "was": "A pilot per team", "now": "One agent platform", "hit": "into four systems.", "metric": "Agent pilots in production", "from": "0 of 6", "to": "5 of 6"}, {"label": "Audit trail", "was": "None", "now": "Every step traced", "hit": null, "metric": "Steps with an audit trace", "from": "None", "to": "100%"}];
+  const SCORE = {"name": "Agent readiness", "today": 1.2, "ready": 4.3};
+  const STEPS = [{"name": "Scan", "weeks": "Weeks 1–2", "title": "You get agent shortlist with value, risk and autonomy level", "body": "Shadow the work, break it into tasks, choose three agents."}, {"name": "Prove on real work", "weeks": "Weeks 3–6", "title": "You get shadow-mode results against human outcomes", "body": "The agent runs in shadow mode on live cases; an eval set is built from your history."}, {"name": "Go live with approvals", "weeks": "Weeks 6–10", "title": "You get production agent, traces and runbooks", "body": "The agent acts with human sign-off; autonomy rises only on evidence."}, {"name": "Scale", "weeks": "Week 10 onward", "title": "You get monthly outcome and adoption report", "body": "Shared platform, new agents added in weeks."}];
+  const MEASURES = [{"name": "Throughput", "title": "Throughput", "desc": "Cases completed per day; straight-through share.", "from": "140", "to": "410", "meta": "Cases completed per day · month 3"}, {"name": "Cycle time", "title": "Cycle time", "desc": "End-to-end time per case, before and after.", "from": "5.2 days", "to": "9 hours", "meta": "End-to-end cycle time · claims · month 3"}, {"name": "Quality", "title": "Quality", "desc": "Task success on the eval set; rework and error rate in production.", "from": "71%", "to": "93%", "meta": "Task success on the eval set · month 2"}, {"name": "Cost per case", "title": "Cost per case", "desc": "Fully loaded, including model costs and human review time.", "from": "$14.80", "to": "$4.10", "meta": "Fully loaded cost per case · month 3"}, {"name": "Adoption", "title": "Adoption", "desc": "Share of eligible work routed to agents; supervisor override rate.", "from": "0%", "to": "62%", "meta": "Eligible work routed to agents · month 4"}];
+  /* ---------- figures: mounted near the screen, drawn in, then they play their tour until a hand arrives ---------- */
+  const figObs = new IntersectionObserver((entries) => entries.forEach((e) => {
+    const host = e.target;
+    if (e.isIntersecting) {
+      if (!host._m) host._m = mountFigure(host, host.dataset.fig);
+      requestAnimationFrame(() => host.classList.add("in"));
+      clearTimeout(host._t); host._t = setTimeout(() => host._m && host._m.play(), 1100);
+    } else { clearTimeout(host._t); host._m && host._m.stop(); }
+  }), { rootMargin: "60px 0px" });
+  document.querySelectorAll(".fig[data-fig]").forEach((f) => figObs.observe(f));
+
+
+  /* ---------- the scene engine: hero → what we hear → the shift. One timeline; the line visual draws the state it is handed ---------- */
+  const sceneEl = document.querySelector(".scene"), track = document.getElementById("scene-track");
+  const heroCopy = document.querySelector(".hero-copy"), bgEl = document.querySelector(".scene-bg"), gridEl = document.querySelector(".scene-grid");
+  const ca = document.querySelector(".copy-a"), cb = document.querySelector(".copy-b"), visEl = document.querySelector(".vis");
+  document.querySelectorAll("[data-words]").forEach((p) => {
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="w">${w}</span>`).join(" ");
+  });
+  const wa = [...ca.querySelectorAll(".w")], wb = [...cb.querySelectorAll(".w")];
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const S = { m: 0, flags: {} };
+  let lastKey = "", heroDrop = 0;
+  const PACE = 4.6 / 3;
+  // copy and visual are one group: a fixed gap between them, the group centred in the screen
+  const placeVis = () => {
+    const vh = innerHeight, gap = clamp(vh * 0.06, 36, 64);
+    const pad = parseFloat(ca.style.paddingTop) || 0;
+    const copyH = Math.max(ca.offsetHeight, cb.offsetHeight) - pad, visH = visEl.offsetHeight;
+    const top = Math.round(Math.max(clamp(vh * 0.11, 80, 112), (vh - copyH - gap - visH) / 2));
+    ca.style.paddingTop = cb.style.paddingTop = top + "px";
+    const bottom = Math.round(Math.max(16, vh - top - copyH - gap - visH));
+    visEl.style.bottom = bottom + "px";
+    // in the hero the card only peeks (names and track), where it always sat; the client logos then drop to sit 30px above its blurred edge
+    const act = heroCopy.querySelector(".hero-actions"), logos = heroCopy.querySelector(".hero-logos");
+    const actBottom = act.offsetTop + act.offsetHeight, visTop = vh - bottom - visH, lh = logos ? logos.offsetHeight : 0;
+    const peek = visEl.children[1].offsetTop + visEl.children[1].offsetHeight + 28;
+    heroDrop = Math.max(vh - peek - visTop, actBottom + 64 + lh + 24 - visTop);
+    if (logos) logos.style.marginTop = Math.max(24, visTop + heroDrop - 30 - lh - actBottom) + "px";
+  };
+
+  /* the four shift rows: name above the track, today → with devx below it */
+  const COLS = SHIFT.map((s, i) => ({ row: "r" + i, name: s.label, metric: s.metric, was: s.from, now: s.to }));
+  // each shift row names its failure somewhere in the problem line: find those words, so they turn red and flag the row as they land
+  const norm = (t) => t.toLowerCase().replace(/[^a-z0-9’']/g, "");
+  const HITS = SHIFT.map((s, i) => {
+    if (!s.hit) return null;
+    const want = s.hit.split(/\s+/).map(norm), have = wa.map((w) => norm(w.textContent));
+    for (let k = 0; k + want.length <= have.length; k++) if (want.every((x, j) => have[k + j] === x)) return { from: k, to: k + want.length - 1, row: "r" + i };
+    return null;
+  });
+  const colLabels = (host) => host.innerHTML = COLS.map((c, i) => `<div class="col-label" data-row="${c.row}"><span class="n">0${i + 1}</span><span class="t">${c.name}</span></div>`).join("");
+  const colVals = (host) => host.innerHTML = COLS.map((c) => `<div class="col-val" data-row="${c.row}"><span class="metric">${c.metric}</span><span class="v"><span class="was">${c.was}</span><i class="arrow"></i><span class="now">${c.now}</span></span></div>`).join("");
+  const markCols = (host, flags, fixed) => host.querySelectorAll("[data-row]").forEach((el) => {
+    el.classList.toggle("flag", !!flags[el.dataset.row]);
+    el.classList.toggle("fixed", !!fixed[el.dataset.row]);
+  });
+
+  function sceneFrame() {
+    placeVis();
+    const vh = innerHeight, r = track.getBoundingClientRect();
+    const sp = clamp(-r.top, 0, r.height - vh) / vh * PACE;     // scroll inside the scene, in timeline screens
+
+    // 1 · the hero scrolls away; the background drains of colour; the visual rises into focus
+    heroCopy.style.transform = `translateY(${(-Math.min(sp, 1.2) * vh).toFixed(1)}px)`;
+    heroCopy.style.opacity = (1 - map(sp, 0.35, 0.8)).toFixed(3);
+    const fade = map(sp, 0.1, 1), fixT = map(sp, 3.1, 3.8);
+    bgEl.style.transform = `scale(${(1 + 0.06 * ease(fade)).toFixed(3)})`;
+    bgEl.style.filter = `grayscale(${(0.9 * map(sp, 0.6, 1.2) * (1 - fixT)).toFixed(2)})`;
+    bgEl.style.opacity = lerp(lerp(1, 0.4, ease(fade)), 0.9, ease(fixT)).toFixed(3);
+    gridEl.style.opacity = (0.9 * map(sp, 0.5, 1.1)).toFixed(2);
+    const focus = ease(map(sp, 0.1, 1.0));
+    visEl.style.transform = `translate(-50%, ${(heroDrop * (1 - focus)).toFixed(1)}px)`;
+    visEl.style.filter = focus > 0.995 ? "none" : `blur(${(5 * (1 - focus)).toFixed(2)}px)`;
+    visEl.style.opacity = lerp(0.55, 1, focus).toFixed(3);
+
+    // 2 · what we hear, word by word; each shift row flags in turn as the quotes land
+    const inA = map(sp, 0.9, 1.2), outA = map(sp, 2.95, 3.25);
+    ca.style.opacity = (inA * (1 - outA)).toFixed(3);
+    ca.style.transform = `translate(-50%, ${(-24 * outA).toFixed(1)}px)`;
+    const na = Math.round(map(sp, 1.15, 2.35) * wa.length);
+
+    // 3 · devx: the copy morphs to the reassurance, the track is painted and every row ticks
+    const inB = map(sp, 3.2, 3.5);
+    cb.style.opacity = inB.toFixed(3);
+    cb.style.transform = `translate(-50%, ${(20 * (1 - inB)).toFixed(1)}px)`;
+    const nb = Math.round(map(sp, 3.45, 3.95) * wb.length);
+    S.m = fixT;
+    S.flags = {};
+    // a row flags when its words land; rows the line does not name flag once the whole line is out
+    if (fixT <= 0) COLS.forEach((c, i) => { const h = HITS[i]; if (h ? na > h.from : na >= wa.length) S.flags[c.row] = true; });
+    Vis.update(S);
+
+    const key = [na, nb, sp >= 4.25].join("|");
+    if (key === lastKey) return;
+    lastKey = key;
+    wa.forEach((w, i) => { w.classList.toggle("on", i < na); w.classList.toggle("hit", i < na && HITS.some((h) => h && i >= h.from && i <= h.to)); });
+    wb.forEach((w, i) => w.classList.toggle("on", i < nb));
+    sceneEl.classList.toggle("cta", sp >= 4.25);
+  }
+  document.fonts.ready.then(() => sceneFrame());
+
+  /* ---------- Vis · the shift line: rows flag red in the problem, the gradient paints them in with devx ---------- */
+  const Vis = (() => {
+    const labelsEl = visEl.querySelector(".labels"), valsEl = visEl.querySelector(".vals");
+    colLabels(labelsEl); colVals(valsEl);
+    visEl.querySelector(".cps").innerHTML = COLS.map((c) => `<span class="cp" data-row="${c.row}"></span>`).join("");
+    const paint = visEl.querySelector(".paint"), END = SCORE.ready / 5;   // the paint stops where the score says
+    visEl.querySelector(".today").style.width = (SCORE.today / 5 * 100).toFixed(1) + "%";
+    const kpiEl = visEl.querySelector(".kpi"), kpiNum = kpiEl.querySelector(".num span"), kick = kpiEl.querySelector(".kick");
+    kick.innerHTML = SCORE.name + " · <b>today</b>";
+    const kpiState = kick.querySelector("b");
+    const centre = (i) => (i + 0.5) / COLS.length;
+    let last = "";
+    return {
+      update(st) {
+        const p = ease(st.m) * END;
+        kpiNum.textContent = lerp(SCORE.today, SCORE.ready, ease(st.m)).toFixed(1);
+        kpiState.textContent = st.m >= 0.98 ? "with devx" : "today";
+        paint.style.clipPath = `inset(0 ${((1 - p) * 100).toFixed(2)}% 0 0 round 20px)`;
+        const fixed = {};
+        COLS.forEach((c, i) => { if (st.m > 0 && p >= centre(i) + 0.012) fixed[c.row] = true; });
+        const key = JSON.stringify([st.flags, fixed]);
+        if (key === last) return;
+        last = key;
+        sceneEl.classList.toggle("flagged", Object.keys(st.flags).length > 0);
+        [labelsEl, valsEl, visEl.querySelector(".cps")].forEach((h) => markCols(h, st.flags, fixed));
+      },
+    };
+  })();
+
+
+  /* ---------- how we work: whichever illustration crosses the middle picks the step ---------- */
+  const steps = STEPS;
+  const list = document.querySelector(".step-list"), rail = [...document.querySelectorAll(".rail i")];
+  const items = [...document.querySelectorAll(".how-item")], detail = document.querySelector(".how-detail");
+  steps.forEach((st, i) => {
+    const btn = document.createElement("button");
+    btn.className = "step"; btn.type = "button"; btn.setAttribute("role", "tab");
+    btn.innerHTML = `<div class="step-top"><span class="step-name"><img src="assets/seal-check.svg" alt="">${st.name}</span><span class="step-weeks">${st.weeks}</span></div>
+      <div class="step-body"><div><h3>${st.title}</h3><p>${st.body}</p></div></div>`;
+    btn.addEventListener("click", () => items[i].scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" }));
+    btn.addEventListener("keydown", (e) => {
+      const n = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+      if (!n) return;
+      e.preventDefault(); const j = clamp(cur + n, 0, steps.length - 1); list.children[j].click(); list.children[j].focus();
+    });
+    list.appendChild(btn);
+  });
+  let cur = -1;
+  function select(i) {
+    if (i === cur) return;
+    cur = i;
+    [...list.children].forEach((b, j) => { b.setAttribute("aria-selected", j === i); b.tabIndex = j === i ? 0 : -1; });
+    rail.forEach((r, j) => r.classList.toggle("on", j === i));
+    detail.querySelector("h3").textContent = steps[i].title;
+    detail.querySelector("p").textContent = steps[i].body;
+  }
+  const howSec = document.querySelector('.how'), firstFrame = document.querySelector('.step-frame');
+  const measure = () => howSec.style.setProperty('--frame-h', firstFrame.offsetHeight + 'px');
+  new ResizeObserver(measure).observe(firstFrame); measure();
+  const middle = new IntersectionObserver((entries) => entries.forEach((e) => {
+    if (e.isIntersecting) select(items.indexOf(e.target));
+  }), { rootMargin: "-48% 0px -48% 0px" });
+  items.forEach((it) => middle.observe(it));
+  select(0);
+
+
+  /* ---------- outcomes: the scroll paints the track; each checkpoint ticks off as the paint passes ---------- */
+  const measures = MEASURES;
+  const AX = 608, AY = 610, AR = 520, NS = "http://www.w3.org/2000/svg";
+  const at = (t, r = AR) => { const a = Math.PI * (1 - t); return [AX + r * Math.cos(a), AY - r * Math.sin(a)]; };
+  const arcD = (r) => { const [x0, y0] = at(0, r), [x1, y1] = at(1, r); return `M${x0},${y0} A${r},${r} 0 0 1 ${x1},${y1}`; };
+  ["arc-base", "arc-fillpath", "arc-rail", "arc-railbase"].forEach((id) => document.getElementById(id).setAttribute("d", arcD(AR)));
+  const ARC_LEN = Math.PI * AR, fillPath = document.getElementById("arc-fillpath");
+  fillPath.style.strokeDasharray = ARC_LEN + 80; fillPath.style.strokeDashoffset = ARC_LEN + 80;
+  const T = measures.map((_, i) => (i + 0.5) / measures.length);
+  const cps = document.getElementById("arc-cps"), labelsEl = document.getElementById("arc-labels"), center = document.getElementById("arc-center");
+  const checks = T.map((t) => {
+    const [x, y] = at(t), g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "cp"); g.setAttribute("transform", `translate(${x},${y})`);
+    g.innerHTML = '<circle r="19"></circle><circle class="dot" r="4"></circle><path d="M-6.5,0.5 L-2,5 L7,-5"></path>';
+    cps.appendChild(g); return g;
+  });
+  const labels = measures.map((m, i) => {
+    const li = document.createElement("li"); li.setAttribute("role", "presentation");
+    const b = document.createElement("button"); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-controls", "arc-center");
+    b.innerHTML = `<span class="n">${String(i + 1).padStart(2, "0")}</span><span class="t">${m.name}</span>`;
+    const [x, y] = at(T[i], AR + 60), a = Math.PI * (1 - T[i]);
+    b.style.left = (x / 1216 * 100) + "%"; b.style.top = (y / 660 * 100) + "%";
+    b.style.transform = `translate(${(-50 + Math.cos(a) * 50).toFixed(1)}%, ${(-50 - Math.sin(a) * 50).toFixed(1)}%)`;
+    b.style.textAlign = Math.cos(a) < -0.3 ? "right" : Math.cos(a) > 0.3 ? "left" : "center";
+    b.addEventListener("click", () => goMeasure(i));
+    b.addEventListener("keydown", (e) => { const n = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!n) return; e.preventDefault(); const j = clamp(i + n, 0, measures.length - 1); goMeasure(j); labels[j].focus(); });
+    li.appendChild(b); labelsEl.appendChild(li); return b;
+  });
+  let active = -1;
+  function show(i) {
+    if (i === active) return;
+    active = i;
+    const m = measures[i];
+    labels.forEach((b, j) => { b.setAttribute("aria-selected", j === i); b.tabIndex = j === i ? 0 : -1; });
+    center.classList.add("out");
+    setTimeout(() => {
+      document.getElementById("arc-title").textContent = m.title;
+      document.getElementById("arc-desc").textContent = m.desc;
+      document.getElementById("arc-from").textContent = m.from;
+      document.getElementById("arc-to").textContent = m.to;
+      document.getElementById("arc-meta").textContent = "Sample outcome report · " + m.meta;
+      center.classList.remove("out");
+    }, reduce ? 0 : 200);
+  }
+  const arcTrack = document.getElementById("arc-track");
+  let lastF = -1;
+  function arcFrame() {
+    const r = arcTrack.getBoundingClientRect();
+    const p = clamp(-r.top / (r.height - innerHeight), 0, 1);
+    const f = 0.03 + 0.97 * p;
+    if (Math.abs(f - lastF) < 0.0015) return;
+    lastF = f;
+    fillPath.style.strokeDashoffset = (ARC_LEN + 80) - (ARC_LEN * f + 40);
+    let now = 0; T.forEach((t, i) => { if (f >= t - 0.02) now = i; });
+    checks.forEach((c, i) => { const passed = f >= T[i] - 0.02; c.classList.toggle("done", passed); c.classList.toggle("now", i === now); labels[i].classList.toggle("done", passed); });
+    show(now);
+  }
+  function goMeasure(i) {
+    const top = arcTrack.getBoundingClientRect().top + scrollY;
+    const p = clamp((T[i] + 0.04 - 0.03) / 0.97, 0, 1);
+    scrollTo({ top: top + p * (arcTrack.offsetHeight - innerHeight), behavior: reduce ? "auto" : "smooth" });
+  }
+  show(0);
+
+
+  /* ---------- proof: the band snaps full screen once it is fully in view; scroll picks the case ---------- */
+  const CASES = [{"mark": "MG", "org": "Marlow General", "who": "Claire Dawson", "role": "Head of Claims Operations", "num": "2 days", "what": "claim cycle time for simple motor claims, down from nine.", "quote": "The agent prepares every claim file before an adjuster opens it. Our people now spend their day on the hard ones."}, {"mark": "TB", "org": "Tessaly Bank", "who": "Imran Qureshi", "role": "COO, Retail Banking", "num": "−60%", "what": "onboarding time for business accounts, with every check logged.", "quote": "Risk signed off because they could see every step the agent took and every approval it waited for."}, {"mark": "OM", "org": "Orrin Manufacturing", "who": "Leena Varghese", "role": "Finance Shared Services Lead", "num": "−11 days", "what": "days sales outstanding after the dispute agent went live.", "quote": "Disputes used to sit in inboxes for weeks. Now the evidence is gathered before anyone asks for it."}];
+  const proofEl = document.querySelector(".proof"), proofTrack = document.getElementById("proof-track"), proofBand = document.getElementById("proof-band");
+  const caseRail = document.getElementById("proof-rail"), dotsEl = document.getElementById("proof-dots");
+  caseRail.innerHTML = CASES.map((c, i) => `<figure class="case" role="tabpanel" aria-roledescription="slide" aria-label="${i + 1} of ${CASES.length}">
+      <blockquote><p class="serif">“${c.quote}”</p>
+        <figcaption class="case-by"><span class="case-mark serif" aria-hidden="true">${c.mark}</span><span><b>${c.who}</b>${c.role}, ${c.org}</span></figcaption></blockquote>
+      <div class="result"><span class="num serif">${c.num}</span><span class="what">${c.what}</span></div>
+    </figure>`).join("");
+  dotsEl.innerHTML = CASES.map((_, i) => `<button role="tab" aria-label="Case ${i + 1}: ${CASES[i].org}"></button>`).join("");
+  // the band arrives at its own height; the snap animates from that height to the full screen
+  const sizeBand = () => { proofBand.style.height = ""; proofBand.style.height = Math.min(proofBand.offsetHeight + 112 * 2, innerHeight - 48) + "px"; };
+  sizeBand(); addEventListener("resize", sizeBand);
+  let caseAt = -1;
+  const showCase = (i) => {
+    if (i === caseAt) return;
+    caseAt = i;
+    caseRail.style.transform = `translateX(${-100 * i}%)`;
+    proofBand.style.setProperty("--bx", (i / (CASES.length - 1)) * 100 + "%");    // the gradient slides with the case
+    dotsEl.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-selected", j === i));
+    caseRail.querySelectorAll(".case").forEach((c, j) => c.inert = j !== i);
+  };
+  // scroll position for case i: the middle of its share of the pinned stretch
+  const caseY = (i) => { const r = proofTrack.getBoundingClientRect(); return scrollY + r.top + (r.height - innerHeight) * (i + 0.5) / CASES.length; };
+  const goCase = (i) => scrollTo({ top: caseY(clamp(i, 0, CASES.length - 1)), behavior: reduce ? "auto" : "smooth" });
+  dotsEl.querySelectorAll("button").forEach((b, j) => b.addEventListener("click", () => goCase(j)));
+  document.getElementById("proof-prev").addEventListener("click", () => goCase(caseAt - 1));
+  document.getElementById("proof-next").addEventListener("click", () => goCase(caseAt + 1));
+  function proofFrame() {
+    const r = proofTrack.getBoundingClientRect(), span = r.height - innerHeight;
+    proofEl.classList.toggle("full", r.top <= 0 && r.bottom >= innerHeight * 0.6);
+    showCase(clamp(Math.floor((-r.top / span) * CASES.length), 0, CASES.length - 1));
+  }
+
+
+  /* partners: add one here and the menu grows a row */
+  const PARTNERS = [
+    { name: "AWS", line: "Advanced Consulting Partner: AI-native stack." },
+    { name: "Google Cloud", line: "Vertex AI and Gemini for enterprise agents." },
+    { name: "Medusa", line: "Open-source headless commerce for AI-native D2C." },
+    { name: "Shopify", line: "Plus-tier commerce migrations and extensibility." },
+    { name: "Stripe", line: "Verified Stripe partner: payments and billing." },
+    { name: "Strapi", line: "Headless CMS implementation partner." },
+  ];
+  document.getElementById("menu-partners").insertAdjacentHTML("beforeend",
+    PARTNERS.map((p) => `<a class="partner" href="${p.href || "#"}"><b>${p.name}</b><span>${p.line}</span><i aria-hidden="true">→</i></a>`).join(""));
+  /* industries: add one here (and its sub-verticals) and the menu grows */
+  const INDUSTRIES = [
+    { name: "Retail", icon: "ph-storefront", subs: ["D2C brands", "Quick Commerce", "Headless / Composable", "Omnichannel", "Marketplaces"] },
+    { name: "Healthcare", icon: "ph-first-aid-kit", subs: [] },
+    { name: "Manufacturing", icon: "ph-factory", subs: [] },
+    { name: "Telco", icon: "ph-cell-signal-high", subs: [] },
+  ];
+  const indList = document.getElementById("ind-list"), indSubs = document.getElementById("ind-subs");
+  indList.innerHTML = INDUSTRIES.map((d, i) => `<a class="menu-row" href="${d.href || "#"}" data-i="${i}"><span class="ic"><i class="ph-duotone ${d.icon}" aria-hidden="true"></i></span>${d.name}<i class="go" aria-hidden="true">→</i></a>`).join("");
+  const showIndustry = (i) => {
+    const d = INDUSTRIES[i];
+    indList.querySelectorAll(".menu-row").forEach((r, j) => r.classList.toggle("on", j === i));
+    indSubs.innerHTML = `<div class="head">Sub-verticals · ${d.name}</div>` +
+      d.subs.map((x, j) => `<a class="sub-row" href="#" style="animation-delay:${j * 30}ms">${x}<i class="go" aria-hidden="true">→</i></a>`).join("") +
+      `<a class="sub-row all" href="${d.href || "#"}">All of ${d.name}<i class="go" aria-hidden="true">→</i></a>`;
+  };
+  indList.querySelectorAll(".menu-row").forEach((r) => {
+    r.addEventListener("pointerenter", () => showIndustry(+r.dataset.i));
+    r.addEventListener("focus", () => showIndustry(+r.dataset.i));
+  });
+  // the column keeps the height of the longest list, so the panel never resizes under the pointer
+  indSubs.style.minHeight = Math.max(...INDUSTRIES.map((_, i) => (showIndustry(i), indSubs.offsetHeight))) + "px";
+  showIndustry(0);
+  /* ---------- nav menus: hover or click opens; moving along the nav slides the shared panel ---------- */
+  const navEl = document.querySelector(".nav"), menuEl = document.getElementById("menu");
+  const triggers = [...navEl.querySelectorAll(".nav-trigger")], panels = triggers.map((t) => document.getElementById(t.getAttribute("aria-controls")));
+  let menuAt = -1, menuClose = 0, menuOpen = 0;
+  // the panel sits centred under its trigger, kept inside the nav, and grows from the trigger
+  const placeMenu = (i) => {
+    const t = triggers[i].getBoundingClientRect(), n = navEl.getBoundingClientRect(), p = panels[i];
+    const w = p.offsetWidth, h = p.offsetHeight, mid = t.left + t.width / 2 - n.left;
+    const left = clamp(mid - w / 2, 0, Math.max(0, n.width - w));
+    menuEl.style.left = left + "px"; menuEl.style.width = w + "px"; menuEl.style.height = h + "px";
+    menuEl.style.setProperty("--ox", mid - left + "px");
+  };
+  const openMenu = (i) => {
+    clearTimeout(menuClose);
+    if (i === menuAt) return;
+    const first = menuAt < 0;
+    menuEl.classList.toggle("instant", first);             // first open appears in place; later ones slide and resize
+    panels.forEach((p, j) => { p.style.setProperty("--dx", (j < i ? -40 : 40) + "px"); p.classList.toggle("on", j === i); });
+    triggers.forEach((t, j) => t.setAttribute("aria-expanded", j === i));
+    placeMenu(i);
+    if (first) { menuEl.offsetWidth; menuEl.classList.remove("instant"); }
+    menuEl.classList.add("open");
+    menuAt = i;
+  };
+  const closeMenu = (refocus) => {
+    clearTimeout(menuOpen);
+    if (menuAt < 0) return;
+    if (refocus) triggers[menuAt].focus();
+    menuEl.classList.remove("open");
+    triggers.forEach((t) => t.setAttribute("aria-expanded", "false"));
+    menuAt = -1;
+  };
+  const closeSoon = () => { clearTimeout(menuOpen); clearTimeout(menuClose); menuClose = setTimeout(() => closeMenu(), 180); };
+  triggers.forEach((t, i) => {
+    // a short intent delay on the first open, so sweeping across the nav does not flash a menu
+    t.addEventListener("pointerenter", () => { clearTimeout(menuOpen); clearTimeout(menuClose); menuOpen = setTimeout(() => openMenu(i), menuAt < 0 ? 90 : 0); });
+    t.addEventListener("click", () => (menuAt === i ? closeMenu() : openMenu(i)));
+    t.addEventListener("keydown", (e) => { if (e.key === "ArrowDown") { e.preventDefault(); openMenu(i); panels[i].querySelector("a")?.focus(); } });
+  });
+  navEl.addEventListener("pointerleave", closeSoon);
+  menuEl.addEventListener("pointerenter", () => clearTimeout(menuClose));
+  navEl.querySelectorAll(".logo, .btn-light").forEach((el) => el.addEventListener("pointerenter", closeSoon));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(true); });
+  document.addEventListener("pointerdown", (e) => { if (!navEl.contains(e.target)) closeMenu(); });
+  navEl.addEventListener("focusout", (e) => { if (!navEl.contains(e.relatedTarget)) closeMenu(); });
+  menuEl.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(); });
+  addEventListener("resize", () => { if (menuAt >= 0) placeMenu(menuAt); });
+
+
+  /* ---------- use cases: a row of cards; the arrows move one card, the count follows the scroll ---------- */
+  const ucTrack = document.querySelector(".ucc-track"), ucCards = [...ucTrack.querySelectorAll(".ucc")], ucCount = document.querySelector(".ucc-count b");
+  const ucBtns = [...document.querySelectorAll(".ucc-btn")];
+  const ucStep = () => ucCards[1].offsetLeft - ucCards[0].offsetLeft;
+  const ucSync = () => {
+    const i = clamp(Math.round(ucTrack.scrollLeft / ucStep()), 0, ucCards.length - 1);
+    ucCount.textContent = String(i + 1).padStart(2, "0");
+    ucBtns[0].disabled = ucTrack.scrollLeft < 4;
+    ucBtns[1].disabled = ucTrack.scrollLeft > ucTrack.scrollWidth - ucTrack.clientWidth - 4;
+  };
+  ucBtns.forEach((b) => b.addEventListener("click", () => ucTrack.scrollBy({ left: +b.dataset.d * ucStep(), behavior: reduce ? "auto" : "smooth" })));
+  ucTrack.addEventListener("scroll", () => requestAnimationFrame(ucSync), { passive: true });
+  ucTrack.addEventListener("keydown", (ev) => { const d = { ArrowRight: 1, ArrowLeft: -1 }[ev.key]; if (d) { ev.preventDefault(); ucBtns[d > 0 ? 1 : 0].click(); } });
+  ucSync();
+
+  /* ---------- where it fits: point at a layer (or a band) and the panel under the row says what passes between them ---------- */
+  const fit = document.querySelector(".fit2"), fitDetail = JSON.parse(fit.dataset.detail), fitPanel = fit.querySelector(".fd-in"), notch = fit.querySelector(".notch");
+  const fitTargets = [...fit.querySelectorAll("[data-k]")];
+  let fitAt = null;
+  const fitShow = (k) => {
+    if (k === fitAt) return;
+    fitAt = k;
+    const el = fit.querySelector(`[data-k="${k}"]`), fr = fit.getBoundingClientRect(), r = el.getBoundingClientRect();
+    fitTargets.forEach((t) => t.classList.toggle("on", t === el));
+    // the notch points up at the tile; for the bands it sits at the band's label
+    const dr = notch.parentElement.getBoundingClientRect();
+    notch.style.opacity = el.classList.contains("fit-foot") ? 0 : 1;
+    notch.style.left = (el.classList.contains("fit-tile") ? r.left - dr.left + r.width / 2 : 48) + "px";
+    fitPanel.classList.add("out");
+    setTimeout(() => {
+      fitPanel.innerHTML = fitDetail[k].map(([a, b]) => `<div class="fd"><span>${a}</span><p>${b}</p></div>`).join("");
+      fitPanel.classList.remove("out");
+    }, reduce ? 0 : 140);
+  };
+  fitTargets.forEach((t) => { t.addEventListener("pointerenter", () => fitShow(t.dataset.k)); t.addEventListener("focus", () => fitShow(t.dataset.k)); });
+  fit.addEventListener("pointerleave", () => fitShow(fit.dataset.home));
+  fitShow(fit.dataset.home);
+  addEventListener("resize", () => { const k = fitAt; fitAt = null; fitShow(k); });
+
+  /* ---------- what we build: one gradient across the bento; each cell shows its own part of it, and it drifts with the pointer ---------- */
+  const bento = document.querySelector(".bento.six"), cells = [...bento.querySelectorAll(".card")];
+  const mapBento = () => {
+    const b = bento.getBoundingClientRect();
+    cells.forEach((c) => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty("--bw", b.width + "px"); c.style.setProperty("--bh", b.height + "px");
+      c.style.setProperty("--ox", (r.left - b.left) + "px"); c.style.setProperty("--oy", (r.top - b.top) + "px");
+    });
+  };
+  const bentoObs = new ResizeObserver(mapBento); [bento, ...cells].forEach((el) => bentoObs.observe(el)); mapBento();
+  addEventListener("load", mapBento);
+  if (!reduce) cells.forEach((c) => {
+    c.addEventListener("pointermove", (ev) => {
+      const r = c.getBoundingClientRect();
+      c.style.setProperty("--tx", (((ev.clientX - r.left) / r.width - 0.5) * -40).toFixed(1) + "px");
+      c.style.setProperty("--ty", (((ev.clientY - r.top) / r.height - 0.5) * -30).toFixed(1) + "px");
+    });
+    c.addEventListener("pointerleave", () => { c.style.setProperty("--tx", "0px"); c.style.setProperty("--ty", "0px"); });
+  });
+
+  /* ---------- reveal ---------- */
+  const rv = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); rv.unobserve(en.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal").forEach((el) => rv.observe(el));
+
+  /* ---------- one scroll loop ---------- */
+  let queued = false;
+  const end = document.querySelector(".end");
+  const ctaBox = document.querySelector(".end-cta > div");
+  const placeCta = () => end.style.setProperty("--cta-top", Math.max(96, innerHeight / 2 - ctaBox.offsetHeight / 2) + "px");
+  new ResizeObserver(placeCta).observe(ctaBox); placeCta();
+  function endFrame() { end.classList.toggle("full", end.getBoundingClientRect().top <= 1); }
+  const setHead = () => document.body.classList.toggle("scrolled", scrollY > 24);
+  const frame = () => { queued = false; setHead(); sceneFrame(); arcFrame(); proofFrame(); endFrame(); };
+  addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(frame); } }, { passive: true });
+  addEventListener("resize", frame);
+  frame();
+
+
+  /* ---------- light / dark ---------- */
+  const themeSw = document.querySelector(".theme-sw");
+  const syncSw = () => themeSw.setAttribute("aria-pressed", String(document.documentElement.dataset.theme === "dark"));
+  themeSw.addEventListener("click", () => {
+    const t = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+    try { localStorage.setItem("devx-theme", t); } catch (e) {}
+    syncSw();
+  });
+  syncSw();
+
+</script>
+</body>
+</html>
